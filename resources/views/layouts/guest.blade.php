@@ -1,30 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<html lang="id">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Scripts -->
+    <title>Login Admin — Nagari Kubang Koto Berapak</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-
-<body class="font-sans text-gray-900 antialiased">
-    <div class="bg-cover bg-center min-h-screen flex flex-col justify-center items-center pt-16"
-        style="background-image: url('{{ asset('Pemandangan.jpeg') }}')">
-        <div
-            class="w-full sm:max-w-md mt-6 px-6 py-10 bg-white bg-opacity-80 backdrop-blur-sm dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-            {{ $slot }}
-        </div>
+<body>
+    <div class="login-wrap">
+        {{ $slot }}
     </div>
 </body>
-
 </html>

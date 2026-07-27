@@ -1,119 +1,80 @@
 @extends('layouts.app')
+
 @section('content')
-<div class="container mx-auto px-4 py-8 max-w-2xl ">
-    
-    
-    <div class="bg-white rounded-lg shadow p-6 mb-6 hover:shadow-xl transition-shadow mt-6 ">
-        <h1 class="text-3xl font-bold mb-6 text-center">Detail Data Panen</h1>
-        @if(session('success'))
-        <div class=" bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-                {{ session('success') }}
-            </div>
-        @endif
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div>
-                <p class="text-gray-600 text-sm">Nama Kelompok Tani</p>
-                <p class="font-semibold">{{ $harvest->nama_kelompok_tani}}</p>
-            </div>
-            <div>
-                <p class="text-gray-600 text-sm">Hasil Pertanian</p>
-                <p class="font-semibold">{{ $harvest->hasil_pertanian }}</p>
-            </div>
-            <div>
-                <p class="text-gray-600 text-sm">Varian</p>
-                <p class="font-semibold">{{ $harvest->varian }}</p>
-            </div>
-            <div>
-                <p class="text-gray-600 text-sm">Total Panen</p>
-                <p class="font-semibold">{{ $harvest->Total_panen }}</p>
-            </div>
-            <div>
-                <p class="text-gray-600 text-sm">Stok tersedia</p>
-                <p class="font-semibold">{{ $harvest->Stok_tersedia }}</p>
-            </div>
-            <div>
-                <p class="text-gray-600 text-sm">Nomor HP</p>
-                <p class="font-semibold">{{ $harvest->nomor_hp }}</p>
-            </div>
-            <div>
-                <p class="text-gray-600 text-sm">Tanggal Panen</p>
-                <p class="font-semibold">{{ $harvest->tanggal_panen->format('d F Y') }}</p>
-            </div>
-            <div>
-                <p class="text-gray-600 text-sm">Lokasi</p>
-                <p class="font-semibold">{{ $harvest->lokasi }}</p>
-            </div>
-        </div>
+    <div style="max-width:750px; margin:0 auto;">
+        <a class="back-link" href="{{ route('admin.harvests.index') }}">← Kembali ke Kelola Data Panen</a>
+        
+        <div class="card" style="padding:32px; box-shadow:var(--shadow-hover);">
+            <h2 style="font-size:22px; font-weight:700; color:var(--green-dark); margin-bottom:20px;">Detail Data Panen & QR Code</h2>
 
-        <div class="border-t pt-6">
-            <h3 class="font-semibold mb-4 text-center">QR Code</h3>
-            <div id="qr" class="flex justify-center mb-4">
-               {!! \SimpleSoftwareIO\QrCode\Facades\QrCode::size(250)->generate(route('harvest.public', $harvest->public_code)) !!}
-            </div>
-            <p class="text-center text-sm text-gray-600">Scan QR Code untuk melihat info publik</p>
-            <p class="text-center text-xs text-gray-500 mt-2">
-                {{ route('harvest.public', $harvest->public_code) }}
-            </p> 
-            @auth   
-            @endauth
-        </div>
+            @if(session('success'))
+                <div style="background:var(--green-light); border:1px solid var(--green); color:var(--green-dark); padding:12px 16px; border-radius:12px; margin-bottom:18px; font-weight:600;">
+                    ✓ {{ session('success') }}
+                </div>
+            @endif
 
-        <div class="flex gap-3 mt-6">
-            <a href="{{ route('admin.harvests.edit', $harvest) }}" 
-               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                Edit Data
-            </a>
-            <a href="{{ route('admin.harvests.index') }}" 
-               class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400">
-                Kembali
-            </a>
-           <a href="{{ route('harvest.public', $harvest->public_code) }}" target="_blank"
-             class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
-            Lihat Halaman Publik
-            </a>
-            <button onclick="downloadQR()" 
-                class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
-                Unduh QR Code
-            </button>
+            <div class="info-grid" style="grid-template-columns:1fr 1fr; margin-bottom:24px;">
+                <div class="info-box"><div class="k">Kelompok Tani</div><div class="v">{{ $harvest->nama_kelompok_tani }}</div></div>
+                <div class="info-box"><div class="k">Hasil Pertanian</div><div class="v">{{ $harvest->hasil_pertanian }}</div></div>
+                <div class="info-box"><div class="k">Varian</div><div class="v">{{ $harvest->varian }}</div></div>
+                <div class="info-box"><div class="k">Total Panen</div><div class="v">{{ $harvest->Total_panen }} kg</div></div>
+                <div class="info-box"><div class="k">Stok Tersedia</div><div class="v">{{ $harvest->Stok_tersedia }} kg</div></div>
+                <div class="info-box"><div class="k">Tanggal Panen</div><div class="v">{{ $harvest->tanggal_panen ? $harvest->tanggal_panen->format('d F Y') : '-' }}</div></div>
+                <div class="info-box"><div class="k">Nomor HP</div><div class="v">{{ $harvest->nomor_hp }}</div></div>
+                <div class="info-box"><div class="k">Lokasi</div><div class="v">{{ $harvest->lokasi }}</div></div>
+            </div>
+
+            <!-- QR CODE BOX -->
+            <div style="background:#fafdf9; border:1px dashed var(--green); border-radius:18px; padding:24px; text-align:center; margin-bottom:24px;">
+                <h3 style="font-size:16px; color:var(--green-dark); margin-bottom:14px;">QR Code Informasi Publik</h3>
+                
+                <div id="qr" style="display:flex; justify-content:center; margin-bottom:14px;">
+                    {!! \SimpleSoftwareIO\QrCode\Facades\QrCode::size(240)->generate(route('harvest.public', $harvest->public_code)) !!}
+                </div>
+
+                <p style="font-size:13px; color:var(--muted);">Scan QR Code di atas menggunakan ponsel untuk mengakses rincian hasil panen ini.</p>
+                <p style="font-size:11px; color:var(--muted); margin-top:4px;">{{ route('harvest.public', $harvest->public_code) }}</p>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="{{ route('admin.harvests.edit', $harvest) }}" class="btn btn-outline">✏️ Edit Data</a>
+                <a href="{{ route('harvest.public', $harvest->public_code) }}" target="_blank" class="btn btn-primary">🌐 Lihat Halaman Publik</a>
+                <button onclick="downloadQR()" class="btn btn-gold">📥 Unduh QR Code</button>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    function downloadQR() {
-        const svg = document.querySelector('#qr svg');
-        const serializer = new XMLSerializer();
-        const source = serializer.serializeToString(svg);
-        
-        const size = 300;      
-        const padding = 20;   
-        const border = 4;      
-        
-        const canvas = document.createElement('canvas');
-        canvas.width = size;
-        canvas.height = size;
-        
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, size, size);
-        const img = new Image();
-        img.onload = function () {
-            const qrSize = size - (padding * 2);
-            ctx.drawImage(img, padding, padding, qrSize, qrSize);
-            ctx.strokeStyle = '#000000';
-            ctx.lineWidth = border;
-            ctx.strokeRect(
-                border / 2,
-                border / 2,
-                size - border,
-                size - border
-            );
-            const a = document.createElement('a');
-            a.download = 'qr-code.png';
-            a.href = canvas.toDataURL('image/png');
-            a.click();
-                     
-        };
-        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(source)));
-    }
-</script>
+
+    <script>
+        function downloadQR() {
+            const svg = document.querySelector('#qr svg');
+            if(!svg) return;
+            const serializer = new XMLSerializer();
+            const source = serializer.serializeToString(svg);
+            
+            const size = 300;      
+            const padding = 20;   
+            const border = 4;      
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, size, size);
+            const img = new Image();
+            img.onload = function () {
+                const qrSize = size - (padding * 2);
+                ctx.drawImage(img, padding, padding, qrSize, qrSize);
+                ctx.strokeStyle = '#000000';
+                ctx.lineWidth = border;
+                ctx.strokeRect(border / 2, border / 2, size - border, size - border);
+                const a = document.createElement('a');
+                a.download = 'qr-code-panen-{{ $harvest->id }}.png';
+                a.href = canvas.toDataURL('image/png');
+                a.click();
+            };
+            img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(source)));
+        }
+    </script>
 @endsection

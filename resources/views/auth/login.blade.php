@@ -1,38 +1,49 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-    <form  method="POST" action="{{ route('login') }}">
-        @csrf
-            <h1 class="flex items-center justify-center mt-8 mb-12 font-extrabold text-3xl ">Login</h1>
+    <div class="login-card">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <div class="brand-badge" style="margin: 0 auto 12px; width:48px; height:48px; font-size:24px;">🌾</div>
+            <h2 style="margin-bottom: 4px;">Login Admin</h2>
+            <p style="font-size: 13px; color: var(--muted);">Nagari Kubang Koto Berapak</p>
+        </div>
+
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+
             <!-- Email Address -->
-            <div class="hight-12">
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-                    autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <div class="field">
+                <label for="email">Email Admin</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="admin@kubangbayang.desa.id">
+                <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-600 text-xs" />
             </div>
-    
+
             <!-- Password -->
-            <div class="mt-6 ">
-                <x-input-label for="password" :value="__('Password')" />
-                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                    autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <div class="field">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="••••••••">
+                <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-600 text-xs" />
             </div>
-    
-            <div class="block mt-6">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox"
-                        class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
-                        name="remember">
-                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+
+            <!-- Remember Me -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin: 18px 0 24px; font-size: 13px; color: var(--muted);">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input id="remember_me" type="checkbox" name="remember" style="accent-color: var(--green);">
+                    <span>Ingat Saya</span>
                 </label>
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}" style="color: var(--green-dark); font-weight: 600;">Lupa Password?</a>
+                @endif
             </div>
-            <x-primary-button
-                class="flex items-center justify-center mt-4 w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-2 px-4 rounded">
-                {{ __('Log in') }}
-            </x-primary-button>
-    
-            
-    </form>
+
+            <button type="submit" class="login-submit">LOG IN</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 24px;">
+            <a href="{{ route('home') }}" style="font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px;">
+                ← Kembali ke Beranda Nagari
+            </a>
+        </div>
+    </div>
 </x-guest-layout>

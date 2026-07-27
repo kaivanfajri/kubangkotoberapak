@@ -1,81 +1,81 @@
 @extends('layouts.app')
+
 @section('content')
-    <div class="container mx-auto px-4 py-8">
+    <div style="margin-bottom: 24px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:18px;">
+            <div>
+                <h2 style="font-size:22px; font-weight:700; color:var(--green-dark);">Kelola Data Panen Nagari</h2>
+                <p style="color:var(--muted); font-size:13.5px;">Daftar data hasil panen kelompok tani dan generasi QR Code publik.</p>
+            </div>
+            <a href="{{ route('admin.harvests.create') }}" class="btn btn-primary">
+                + Tambah Data Panen
+            </a>
         </div>
-        
+
         @if(session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-            {{ session('success') }}
-        </div>
+            <div style="background:var(--green-light); border:1px solid var(--green); color:var(--green-dark); padding:12px 16px; border-radius:12px; margin-bottom:18px; font-weight:600;">
+                ✓ {{ session('success') }}
+            </div>
         @endif
-        
-        <div class="bg-white rounded-lg shadow overflow-hidden ">
-            <table
-            class="min-w-full divide-y divide-gray-200 border-separate border-spacing-2 border border-gray-400 dark:border-gray-500">
-            <h1 class="text-3xl font-bold text-center p-6 mt-6">Data Panen</h1>
-            <div class="flex justify-between items-center mb-6 ml-4">
-                <a href="{{ route('admin.harvests.create') }}"
-                    class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
-                    + Tambah Data
-                </a>
-                <thead class="bg-green-400">
+
+        <div class="table-wrap">
+            <table>
+                <thead>
                     <tr>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-900 uppercase hover:bg-green-500">Nama Kelompok Tani</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-900 uppercase hover:bg-green-500">Hasil Pertanian</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-900 uppercase hover:bg-green-500">Varian</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-900 uppercase hover:bg-green-500">Total panen</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-900 uppercase hover:bg-green-500">Stok tersedia</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-900 uppercase hover:bg-green-500">Tanggal Panen</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-900 uppercase hover:bg-green-500">Nomor HP</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-900 uppercase hover:bg-green-500">Lokasi</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-900 uppercase hover:bg-green-500">Aksi</th>
+                        <th>Kelompok Tani</th>
+                        <th>Hasil Pertanian</th>
+                        <th>Varian</th>
+                        <th>Total Panen</th>
+                        <th>Stok Tersedia</th>
+                        <th>Tanggal Panen</th>
+                        <th>Nomor HP</th>
+                        <th>Lokasi</th>
+                        <th style="text-align:center;">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody>
                     @forelse($harvests as $harvest)
-                        <tr class="hover:bg-green-100">
-                            <td class="px-6 py-4 text-center ">{{$harvest->nama_kelompok_tani}}</td>
-                            <td class="px-6 py-4 text-center">{{ $harvest->hasil_pertanian }}</td>
-                            <td class="px-6 py-4 text-center">{{ $harvest->varian }}</td>
-                            <td class="px-6 py-4 text-center">{{ $harvest->Total_panen }}</td>
-                            <td class="px-6 py-4 text-center">{{ $harvest->Stok_tersedia }}</td>
-                            <td class="px-6 py-4 text-center">{{ $harvest->tanggal_panen->format('d M Y') }}</td>
-                            <td class="px-6 py-4 text-center">{{ $harvest->nomor_hp }}</td>
-                            <td class="px-6 py-4 text-center">{{ $harvest->lokasi }}</td>
-                            <td class="px-6 py-4 text-center items-center justify-center ml-2">
-                                <div class="inline-flex gap-3">
-                                    <a href="{{ route('admin.harvests.show', $harvest) }}"
-                                        class="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600 transition">
-                                        Lihat QR
+                        <tr>
+                            <td style="font-weight:600; color:var(--green-dark);">{{ $harvest->nama_kelompok_tani }}</td>
+                            <td><span class="pill pill-gold">{{ $harvest->hasil_pertanian }}</span></td>
+                            <td>{{ $harvest->varian }}</td>
+                            <td><strong>{{ $harvest->Total_panen }}</strong> kg</td>
+                            <td><strong>{{ $harvest->Stok_tersedia }}</strong> kg</td>
+                            <td>{{ $harvest->tanggal_panen ? $harvest->tanggal_panen->format('d M Y') : '-' }}</td>
+                            <td>{{ $harvest->nomor_hp }}</td>
+                            <td>{{ $harvest->lokasi }}</td>
+                            <td style="text-align:center;">
+                                <div style="display:inline-flex; gap:6px;">
+                                    <a href="{{ route('admin.harvests.show', $harvest) }}" class="btn btn-gold btn-sm" title="Lihat QR Code">
+                                        📱 QR
                                     </a>
 
-                                    <a href="{{ route('admin.harvests.edit', $harvest) }}"
-                                        class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                                        Edit
+                                    <a href="{{ route('admin.harvests.edit', $harvest) }}" class="btn btn-outline btn-sm">
+                                        ✏️ Edit
                                     </a>
-                                    <form action="{{ route('admin.harvests.destroy', $harvest) }}" method="POST"
-                                        onsubmit="return confirm('Yakin hapus data ini?')">
+
+                                    <form action="{{ route('admin.harvests.destroy', $harvest) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data panen ini?')" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                            class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition">
-                                            Hapus
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            🗑️ Hapus
                                         </button>
                                     </form>
                                 </div>
-
-                                </form>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-4 text-center text-gray-500 text-center">Belum ada data</td>
+                            <td colspan="9" style="text-align:center; padding:30px; color:var(--muted);">
+                                Belum ada data panen yang tersimpan. Klik tombol "+ Tambah Data Panen" untuk menambahkan data baru.
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-        <div class="mt-4">
+
+        <div style="margin-top:20px;">
             {{ $harvests->links() }}
         </div>
     </div>

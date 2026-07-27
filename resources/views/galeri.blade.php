@@ -1,0 +1,118 @@
+@extends('layouts.nagari')
+
+@section('title', 'Galeri Dokumentasi — Nagari Kubang Koto Berapak')
+
+@section('content')
+  <!-- HERO BANNER -->
+  <div class="hero" style="background-image: url('{{ asset('Pemandangan.jpeg') }}')">
+    <div class="hero-content">
+      <span class="hero-badge">Dokumentasi</span>
+      <h1>Galeri Nagari Kubang Koto Berapak</h1>
+      <p class="hero-sub">Potret keindahan bentang alam, kehidupan masyarakat agraris, tradisi adat, dan kegiatan nagari.</p>
+    </div>
+  </div>
+
+  <!-- GALLERY SECTION -->
+  <div class="section">
+    <div class="wrap">
+      <!-- FILTER BUTTONS -->
+      <div class="filter-bar reveal" id="galFilter">
+        <button class="filter-btn active" onclick="filterGallery('all', this)">Semua Foto</button>
+        <button class="filter-btn" onclick="filterGallery('pertanian', this)">Pertanian</button>
+        <button class="filter-btn" onclick="filterGallery('peternakan', this)">Peternakan</button>
+        <button class="filter-btn" onclick="filterGallery('sejarah', this)">Adat & Sejarah</button>
+        <button class="filter-btn" onclick="filterGallery('peta', this)">Peta Wilayah</button>
+      </div>
+
+      <!-- MASONRY GRID -->
+      <div class="masonry reveal" id="galGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox" id="lightboxModal">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <span class="lightbox-nav lightbox-prev" onclick="shiftLightbox(-1)">‹</span>
+    <img id="lightboxImg" src="" alt="Full view">
+    <span class="lightbox-nav lightbox-next" onclick="shiftLightbox(1)">›</span>
+    <div class="lightbox-cap" id="lightboxCap"></div>
+  </div>
+
+  <!-- SECTION HUBUNGI KAMI -->
+  <x-contact-section />
+
+  <!-- FOOTER -->
+  @include('layouts.footer')
+
+  <!-- JS GALLERY & LIGHTBOX LOGIC -->
+  <script>
+    const galleryItems = [
+      { src: "{{ asset('Profil2.JPG') }}", cat: 'sejarah', cap: 'Pemandangan Persawahan Nagari Kubang' },
+      { src: "{{ asset('Profil3.JPG') }}", cat: 'sejarah', cap: 'Hamparan Sawah Irigasi Sungai Bayang' },
+      { src: "{{ asset('pertanian1.JPG') }}", cat: 'pertanian', cap: 'Aktivitas Panen Padi Sawah Tani' },
+      { src: "{{ asset('Pertanian2.jpeg') }}", cat: 'pertanian', cap: 'Bibit Padi Unggul Cisokan' },
+      { src: "{{ asset('Pertanian3.JPG') }}", cat: 'pertanian', cap: 'Pengolahan Lahan Sawah' },
+      { src: "{{ asset('Pertanian4.JPG') }}", cat: 'pertanian', cap: 'Sistem Irigasi Tradisional Nagari' },
+      { src: "{{ asset('Peternakan1.jpeg') }}", cat: 'peternakan', cap: 'Peternakan Sapi Potong Nagari' },
+      { src: "{{ asset('Peternakan2.jpeg') }}", cat: 'peternakan', cap: 'Penggembalaan Ternak Harian' },
+      { src: "{{ asset('Peternakan3.jpeg') }}", cat: 'peternakan', cap: 'Pemberian Pakan Hijauan' },
+      { src: "{{ asset('Sejarah1.JPG') }}", cat: 'sejarah', cap: 'Bentang Alam Bersejarah Nagari Kubang' },
+      { src: "{{ asset('Sejarah4.jpeg') }}", cat: 'sejarah', cap: 'Batu Adat Perlindungan Nagari' },
+      { src: "{{ asset('Peta potensi nagari.jpeg') }}", cat: 'peta', cap: 'Peta Potensi Lahan Nagari' },
+      { src: "{{ asset('peta topografi.jpeg') }}", cat: 'peta', cap: 'Peta Topografi & Kontur' },
+      { src: "{{ asset('Peta rawan kebencanaan.jpeg') }}", cat: 'peta', cap: 'Peta Mitigasi Bencana' }
+    ];
+
+    let activeIndex = 0;
+    let visibleItems = [...galleryItems];
+
+    function filterGallery(cat, btnEl) {
+      if(btnEl) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+      }
+
+      if(cat === 'all') {
+        visibleItems = [...galleryItems];
+      } else {
+        visibleItems = galleryItems.filter(x => x.cat === cat);
+      }
+
+      renderGallery();
+    }
+
+    function renderGallery() {
+      const grid = document.getElementById('galGrid');
+      grid.innerHTML = visibleItems.map((item, idx) => `
+        <div class="masonry-item">
+          <img src="${item.src}" alt="${item.cap}" onclick="openLightbox(${idx})">
+        </div>
+      `).join('');
+    }
+
+    function openLightbox(idx) {
+      activeIndex = idx;
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('lightboxImg');
+      const cap = document.getElementById('lightboxCap');
+
+      img.src = visibleItems[activeIndex].src;
+      cap.innerText = visibleItems[activeIndex].cap;
+      modal.classList.add('open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.remove('open');
+    }
+
+    function shiftLightbox(dir) {
+      activeIndex = (activeIndex + dir + visibleItems.length) % visibleItems.length;
+      document.getElementById('lightboxImg').src = visibleItems[activeIndex].src;
+      document.getElementById('lightboxCap').innerText = visibleItems[activeIndex].cap;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => renderGallery());
+  </script>
+@endsection
