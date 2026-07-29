@@ -15,6 +15,7 @@
   <nav class="navbar" id="mainNavbar">
     <div class="nav-inner">
       <a href="{{ route('home') }}" class="brand">
+        <img src="{{ asset('icon.jpeg') }}" alt="Logo Pesisir Selatan" class="brand-logo">
         <span>Kubang Bayang Pesisir Selatan<small>Nagari Kubang Koto Berapak</small></span>
       </a>
 
@@ -28,14 +29,13 @@
           <div class="dropdown">
             <a href="{{ route('pertanian') }}">Pertanian</a>
             <a href="{{ route('Peternakan') }}">Peternakan</a>
-            <a href="{{ route('pertanian') }}#kelompok-tani">Kelompok Tani</a>
-            <a href="{{ route('home') }}#peta-potensi">Peta Potensi</a>
           </div>
         </div>
         <div class="nav-item"><a href="{{ route('struktur') }}" class="nav-link {{ request()->routeIs('struktur') ? 'current' : '' }}">Struktur Nagari</a></div>
         <div class="nav-item"><a href="{{ route('lembaga') }}" class="nav-link {{ request()->routeIs('lembaga') ? 'current' : '' }}">Lembaga</a></div>
         <div class="nav-item"><a href="{{ route('umkm') }}" class="nav-link {{ request()->routeIs('umkm') ? 'current' : '' }}">UMKM</a></div>
         <div class="nav-item"><a href="{{ route('galeri') }}" class="nav-link {{ request()->routeIs('galeri') ? 'current' : '' }}">Galeri</a></div>
+        <div class="nav-item"><a href="{{ route('berita') }}" class="nav-link {{ request()->routeIs('berita*') ? 'current' : '' }}">Berita</a></div>
         <div class="nav-item"><a href="{{ route('login') }}" class="nav-link login-btn">Login</a></div>
       </div>
 
@@ -53,6 +53,7 @@
       <a href="{{ route('lembaga') }}">Lembaga</a>
       <a href="{{ route('umkm') }}">UMKM</a>
       <a href="{{ route('galeri') }}">Galeri</a>
+      <a href="{{ route('berita') }}">Berita</a>
       <a href="{{ route('contact') }}">Hubungi Kami</a>
       <a href="{{ route('login') }}" style="color:var(--green-dark);font-weight:700;">Login Admin</a>
     </div>

@@ -28,7 +28,7 @@
     </div>
     <div class="stat">
       <div class="num" data-count="5">0</div>
-      <div class="lbl">Jorong / Korong</div>
+      <div class="lbl">Fasilitas Ibadah</div>
     </div>
   </div>
 
@@ -103,10 +103,7 @@
       <div class="eyebrow center">Video Profil</div>
       <h2 class="section-title center reveal">Dokumentasi Nagari Kubang</h2>
       <div class="video-frame reveal" style="max-width:860px; margin:30px auto 0;">
-        <video controls style="width:100%; height:100%; border-radius:22px; object-fit:cover;">
-          <source src="{{ asset('DEMONSTRASI PENGGUNAAN WEBSITE.mp4') }}" type="video/mp4">
-          Browser Anda tidak mendukung pemutar video HTML5.
-        </video>
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/aQ5y-pAzR8k" title="Dokumentasi Nagari Kubang" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%; height:100%; border:0; border-radius:22px;"></iframe>
       </div>
     </div>
   </div>
@@ -114,35 +111,39 @@
   <!-- PETA POTENSI NAGARI -->
   <div class="section section-alt" id="peta-potensi">
     <div class="wrap">
-      <div class="eyebrow center">Informasi Wilayah</div>
-      <h2 class="section-title center reveal">Peta Potensi Nagari</h2>
-      <div class="grid grid-4 reveal" style="margin-top:30px;">
-        <div class="card card-hover">
-          <div class="card-img" style="background-image:url('{{ asset('Peta potensi nagari.jpeg') }}')"></div>
-          <div class="card-body">
-            <h4>Peta Potensi Nagari</h4>
-            <p>Sebaran potensi lahan pertanian padi dan komoditas nagari.</p>
+      <div class="eyebrow center">Informasi Wilayah Nagari</div>
+      <h2 class="section-title center reveal">Peta Potensi & Wilayah Nagari</h2>
+      
+      <div style="display:flex; flex-direction:column; gap:32px; margin-top:30px;">
+        <!-- Peta Potensi Nagari -->
+        <div class="reveal" style="background:#e8f5e9; border-radius:18px; padding:24px; box-shadow:0 4px 15px rgba(0,0,0,0.06);">
+          <h3 style="color:var(--green-dark); font-size:22px; font-weight:700; text-align:center; margin-bottom:20px;">Peta potensi nagari</h3>
+          <div style="display:flex; justify-content:center; align-items:center;">
+            <img src="{{ asset('Peta potensi nagari.jpeg') }}" alt="Peta Potensi Nagari" style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08);">
           </div>
         </div>
-        <div class="card card-hover">
-          <div class="card-img" style="background-image:url('{{ asset('peta topografi.jpeg') }}')"></div>
-          <div class="card-body">
-            <h4>Peta Topografi</h4>
-            <p>Kontur bentang alam dan elevasi daratan nagari.</p>
+
+        <!-- Peta Topografi Nagari -->
+        <div class="reveal" style="background:#e8f5e9; border-radius:18px; padding:24px; box-shadow:0 4px 15px rgba(0,0,0,0.06);">
+          <h3 style="color:var(--green-dark); font-size:22px; font-weight:700; text-align:center; margin-bottom:20px;">Peta Topografi nagari</h3>
+          <div style="display:flex; justify-content:center; align-items:center;">
+            <img src="{{ asset('peta topografi.jpeg') }}" alt="Peta Topografi Nagari" style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08);">
           </div>
         </div>
-        <div class="card card-hover">
-          <div class="card-img" style="background-image:url('{{ asset('Peta wilayah pertanian nagari.jpeg') }}')"></div>
-          <div class="card-body">
-            <h4>Peta Pertanian</h4>
-            <p>Pemetaan distribusi lahan persawahan dan jaringan irigasi.</p>
+
+        <!-- Peta Wilayah Pertanian Nagari -->
+        <div class="reveal" style="background:#e8f5e9; border-radius:18px; padding:24px; box-shadow:0 4px 15px rgba(0,0,0,0.06);">
+          <h3 style="color:var(--green-dark); font-size:22px; font-weight:700; text-align:center; margin-bottom:20px;">Peta Wilayah pertanian</h3>
+          <div style="display:flex; justify-content:center; align-items:center;">
+            <img src="{{ asset('Peta wilayah pertanian nagari.jpeg') }}" alt="Peta Wilayah Pertanian Nagari" style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08);">
           </div>
         </div>
-        <div class="card card-hover">
-          <div class="card-img" style="background-image:url('{{ asset('Peta rawan kebencanaan.jpeg') }}')"></div>
-          <div class="card-body">
-            <h4>Peta Mitigasi Bencana</h4>
-            <p>Zona kerawanan banjir serta pemetaan jalur evakuasi.</p>
+
+        <!-- Peta Rawan Kebencanaan Nagari -->
+        <div class="reveal" style="background:#e8f5e9; border-radius:18px; padding:24px; box-shadow:0 4px 15px rgba(0,0,0,0.06);">
+          <h3 style="color:var(--green-dark); font-size:22px; font-weight:700; text-align:center; margin-bottom:20px;">Peta Rawan Bencana nagari</h3>
+          <div style="display:flex; justify-content:center; align-items:center;">
+            <img src="{{ asset('Peta rawan kebencanaan.jpeg') }}" alt="Peta Rawan Bencana Nagari" style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08);">
           </div>
         </div>
       </div>

@@ -130,16 +130,49 @@ class StrukturLembagaController extends Controller
 
     public function updateStruktur(Request $request)
     {
+        $categories = ['pemerintah', 'bamus', 'lpmn'];
         $payload = [
             'slogan' => $request->input('slogan', 'Basamo Mangko Manjadi'),
-            'pemerintah' => array_values($request->input('pemerintah', [])),
-            'bamus' => array_values($request->input('bamus', [])),
-            'lpmn' => array_values($request->input('lpmn', []))
         ];
+
+        foreach ($categories as $cat) {
+            $items = $request->input($cat, []);
+            $processed = [];
+
+            foreach ($items as $index => $item) {
+                $fotoPath = $item['foto_existing'] ?? null;
+
+                // Handle cropped base64 image if uploaded from cropping modal
+                if (!empty($item['foto_cropped']) && str_contains($item['foto_cropped'], 'data:image')) {
+                    $base64Data = $item['foto_cropped'];
+                    @list($type, $data) = explode(';', $base64Data);
+                    @list(, $data)      = explode(',', $data);
+                    if (!empty($data)) {
+                        $decoded = base64_decode($data);
+                        $filename = 'struktur/crop_' . time() . '_' . uniqid() . '.jpg';
+                        Storage::disk('public')->put($filename, $decoded);
+                        $fotoPath = $filename;
+                    }
+                } elseif ($request->hasFile("{$cat}.{$index}.foto_file")) {
+                    $file = $request->file("{$cat}.{$index}.foto_file");
+                    if ($file->isValid()) {
+                        $fotoPath = $file->store('struktur', 'public');
+                    }
+                }
+
+                $processed[] = [
+                    'jabatan' => $item['jabatan'] ?? '',
+                    'nama' => $item['nama'] ?? '',
+                    'foto' => $fotoPath,
+                ];
+            }
+
+            $payload[$cat] = $processed;
+        }
 
         $this->writeJsonData($this->getStrukturPath(), $payload);
 
-        return redirect()->back()->with('success', 'Struktur Pemerintahan Nagari berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Struktur Nagari dan foto pengurus yang dipotong (cropped) berhasil diperbarui.');
     }
 
     public function editLembaga()

@@ -18,10 +18,11 @@
       <!-- FILTER BUTTONS -->
       <div class="filter-bar reveal" id="galFilter">
         <button class="filter-btn active" onclick="filterGallery('all', this)">Semua Foto</button>
-        <button class="filter-btn" onclick="filterGallery('pertanian', this)">Pertanian</button>
-        <button class="filter-btn" onclick="filterGallery('peternakan', this)">Peternakan</button>
-        <button class="filter-btn" onclick="filterGallery('sejarah', this)">Adat & Sejarah</button>
-        <button class="filter-btn" onclick="filterGallery('peta', this)">Peta Wilayah</button>
+        <button class="filter-btn" onclick="filterGallery('Pertanian', this)">Pertanian</button>
+        <button class="filter-btn" onclick="filterGallery('Peternakan', this)">Peternakan</button>
+        <button class="filter-btn" onclick="filterGallery('Adat & Sejarah', this)">Adat & Sejarah</button>
+        <button class="filter-btn" onclick="filterGallery('Peta Wilayah', this)">Peta Wilayah</button>
+        <button class="filter-btn" onclick="filterGallery('Kegiatan Nagari', this)">Kegiatan Nagari</button>
       </div>
 
       <!-- MASONRY GRID -->
@@ -48,25 +49,37 @@
 
   <!-- JS GALLERY & LIGHTBOX LOGIC -->
   <script>
-    const galleryItems = [
-      { src: "{{ asset('Profil2.JPG') }}", cat: 'sejarah', cap: 'Pemandangan Persawahan Nagari Kubang' },
-      { src: "{{ asset('Profil3.JPG') }}", cat: 'sejarah', cap: 'Hamparan Sawah Irigasi Sungai Bayang' },
-      { src: "{{ asset('pertanian1.JPG') }}", cat: 'pertanian', cap: 'Aktivitas Panen Padi Sawah Tani' },
-      { src: "{{ asset('Pertanian2.jpeg') }}", cat: 'pertanian', cap: 'Bibit Padi Unggul Cisokan' },
-      { src: "{{ asset('Pertanian3.JPG') }}", cat: 'pertanian', cap: 'Pengolahan Lahan Sawah' },
-      { src: "{{ asset('Pertanian4.JPG') }}", cat: 'pertanian', cap: 'Sistem Irigasi Tradisional Nagari' },
-      { src: "{{ asset('Peternakan1.jpeg') }}", cat: 'peternakan', cap: 'Peternakan Sapi Potong Nagari' },
-      { src: "{{ asset('Peternakan2.jpeg') }}", cat: 'peternakan', cap: 'Penggembalaan Ternak Harian' },
-      { src: "{{ asset('Peternakan3.jpeg') }}", cat: 'peternakan', cap: 'Pemberian Pakan Hijauan' },
-      { src: "{{ asset('Sejarah1.JPG') }}", cat: 'sejarah', cap: 'Bentang Alam Bersejarah Nagari Kubang' },
-      { src: "{{ asset('Sejarah4.jpeg') }}", cat: 'sejarah', cap: 'Batu Adat Perlindungan Nagari' },
-      { src: "{{ asset('Peta potensi nagari.jpeg') }}", cat: 'peta', cap: 'Peta Potensi Lahan Nagari' },
-      { src: "{{ asset('peta topografi.jpeg') }}", cat: 'peta', cap: 'Peta Topografi & Kontur' },
-      { src: "{{ asset('Peta rawan kebencanaan.jpeg') }}", cat: 'peta', cap: 'Peta Mitigasi Bencana' }
+    // Build gallery items from database data
+    const galleryItems = @json($galeris->map(function($g) {
+        return [
+            'src' => '/storage/'.$g->gambar,
+            'cat' => $g->kategori,
+            'cap' => $g->caption,
+        ];
+    })->values());
+
+    // Fallback: if no DB data yet, use static assets
+    const fallbackItems = [
+      { src: "{{ asset('Profil2.JPG') }}", cat: 'Adat & Sejarah', cap: 'Pemandangan Persawahan Nagari Kubang' },
+      { src: "{{ asset('Profil3.JPG') }}", cat: 'Adat & Sejarah', cap: 'Hamparan Sawah Irigasi Sungai Bayang' },
+      { src: "{{ asset('pertanian1.JPG') }}", cat: 'Pertanian', cap: 'Aktivitas Panen Padi Sawah Tani' },
+      { src: "{{ asset('Pertanian2.jpeg') }}", cat: 'Pertanian', cap: 'Bibit Padi Unggul Cisokan' },
+      { src: "{{ asset('Pertanian3.JPG') }}", cat: 'Pertanian', cap: 'Pengolahan Lahan Sawah' },
+      { src: "{{ asset('Pertanian4.JPG') }}", cat: 'Pertanian', cap: 'Sistem Irigasi Tradisional Nagari' },
+      { src: "{{ asset('Peternakan1.jpeg') }}", cat: 'Peternakan', cap: 'Peternakan Sapi Potong Nagari' },
+      { src: "{{ asset('Peternakan2.jpeg') }}", cat: 'Peternakan', cap: 'Penggembalaan Ternak Harian' },
+      { src: "{{ asset('Peternakan3.jpeg') }}", cat: 'Peternakan', cap: 'Pemberian Pakan Hijauan' },
+      { src: "{{ asset('Sejarah1.JPG') }}", cat: 'Adat & Sejarah', cap: 'Bentang Alam Bersejarah Nagari Kubang' },
+      { src: "{{ asset('Sejarah4.jpeg') }}", cat: 'Adat & Sejarah', cap: 'Batu Adat Perlindungan Nagari' },
+      { src: "{{ asset('Peta potensi nagari.jpeg') }}", cat: 'Peta Wilayah', cap: 'Peta Potensi Lahan Nagari' },
+      { src: "{{ asset('peta topografi.jpeg') }}", cat: 'Peta Wilayah', cap: 'Peta Topografi & Kontur' },
+      { src: "{{ asset('Peta rawan kebencanaan.jpeg') }}", cat: 'Peta Wilayah', cap: 'Peta Mitigasi Bencana' }
     ];
 
+    const allItems = galleryItems.length > 0 ? galleryItems : fallbackItems;
+
     let activeIndex = 0;
-    let visibleItems = [...galleryItems];
+    let visibleItems = [...allItems];
 
     function filterGallery(cat, btnEl) {
       if(btnEl) {
@@ -75,9 +88,9 @@
       }
 
       if(cat === 'all') {
-        visibleItems = [...galleryItems];
+        visibleItems = [...allItems];
       } else {
-        visibleItems = galleryItems.filter(x => x.cat === cat);
+        visibleItems = allItems.filter(x => x.cat === cat);
       }
 
       renderGallery();

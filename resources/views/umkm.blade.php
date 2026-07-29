@@ -42,7 +42,7 @@
       <p style="color:var(--muted); font-size:14px; margin-bottom: 24px;">Beras kuliner khas hasil panen persawahan Nagari Kubang yang diproses secara alami dan perah.</p>
 
       <div class="grid grid-3 reveal" id="berasGrid">
-        <div class="card clickable card-hover" onclick="showBerasDetail('beras-cisokan')">
+        <div class="card clickable card-hover">
           <div class="card-img" style="background-image:url('{{ asset('Durian taba.jpeg') }}')"></div>
           <div class="card-body">
             <span class="pill pill-gold">Beras Unggulan</span>
@@ -53,7 +53,7 @@
           </div>
         </div>
 
-        <div class="card clickable card-hover" onclick="showBerasDetail('beras-sokan')">
+        <div class="card clickable card-hover">
           <div class="card-img" style="background-image:url('{{ asset('pertanian1.JPG') }}')"></div>
           <div class="card-body">
             <span class="pill pill-gold">Beras Super</span>
@@ -64,7 +64,7 @@
           </div>
         </div>
 
-        <div class="card clickable card-hover" onclick="showBerasDetail('beras-organik')">
+        <div class="card clickable card-hover">
           <div class="card-img" style="background-image:url('{{ asset('sawah balik.jpeg') }}')"></div>
           <div class="card-body">
             <span class="pill">Beras Organik</span>
@@ -83,7 +83,7 @@
     <div class="wrap" style="max-width:860px;">
       <a class="back-link" onclick="closeUmkmDetail()">← Kembali ke Katalog UMKM</a>
       <h2 class="section-title" id="udTitle">Detail Usaha UMKM</h2>
-      
+
       <div class="info-grid">
         <div class="info-box"><div class="k">Pemilik Usaha</div><div class="v" id="udPemilik">-</div></div>
         <div class="info-box"><div class="k">Kategori</div><div class="v" id="udKategori">-</div></div>
@@ -114,12 +114,20 @@
 
   <!-- JS SEARCH, FILTER & DETAIL LOGIC -->
   <script>
-    const umkmList = [
-      { id: 'u1', nama: 'Rendang & Kalio Uni Wilda', kategori: 'Kuliner', pemilik: 'Uni Wilda', hp: '6281234567890', alamat: 'Jorong Durian Taba', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop', desc: 'Rendang daging sapi khas Minang racikan bumbu rempah kelapa sangrai alami dari kebun Nagari Kubang.', products: ['Rendang Daging (250g/500g)', 'Kalio Daging', 'Serundeng Kelapa'] },
-      { id: 'u2', nama: 'Keripik Balado Sokan', kategori: 'Kuliner', pemilik: 'Ibu Fatimah', hp: '6281234567891', alamat: 'Jorong Sungai Tapuh', img: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?q=80&w=600&auto=format&fit=crop', desc: 'Keripik singkong balado pedas manis buatan olahan rumahan yang renyah dan gurih.', products: ['Keripik Balado Merah', 'Keripik Sanjai Plastik', 'Keripik Pisang'] },
-      { id: 'u3', nama: 'Kopi Bubuk Nagari', kategori: 'Sembako', pemilik: 'Pak Malin', hp: '6281234567892', alamat: 'Jorong Pintu Rayo', img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600&auto=format&fit=crop', desc: 'Kopi Robusta asli dipetik dari kebun perbukitan Nagari Kubang, disangrai secara tradisional.', products: ['Kopi Bubuk Murni (100g)', 'Kopi Arabika Bayang'] },
-      { id: 'u4', nama: 'Kain Tenun Bayang', kategori: 'Kerajinan', pemilik: 'Kak Ros', hp: '6281234567893', alamat: 'Jorong Ikua Koto', img: 'https://images.unsplash.com/photo-1606744882674-f9698946129b?q=80&w=600&auto=format&fit=crop', desc: 'Kerajinan selendang dan sarung tenun tradisional Minangkabau dengan motif ukiran adat lokal.', products: ['Selendang Tenun', 'Songket Motif Bayang', 'Syal Mini'] }
-    ];
+    // Build UMKM list from database data passed via Blade
+    const umkmList = @json($umkms->map(function($u) {
+        return [
+            'id' => 'u'.$u->id,
+            'nama' => $u->nama_usaha,
+            'kategori' => $u->kategori,
+            'pemilik' => $u->pemilik,
+            'hp' => $u->nomor_wa,
+            'alamat' => $u->alamat,
+            'img' => $u->foto ? '/storage/'.$u->foto : 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600&auto=format&fit=crop',
+            'desc' => $u->deskripsi,
+            'products' => $u->produk_utama ?? [],
+        ];
+    })->values());
 
     function filterUmkm() {
       const q = document.getElementById('umkmSearch').value.toLowerCase();
@@ -132,11 +140,8 @@
         return matchQ && matchK;
       });
 
-      if (sort === 'az') {
-        filtered.sort((a, b) => a.nama.localeCompare(b.nama));
-      } else if (sort === 'za') {
-        filtered.sort((a, b) => b.nama.localeCompare(a.nama));
-      }
+      if (sort === 'az') filtered.sort((a, b) => a.nama.localeCompare(b.nama));
+      else if (sort === 'za') filtered.sort((a, b) => b.nama.localeCompare(a.nama));
 
       renderUmkmGrid(filtered);
     }
@@ -176,7 +181,8 @@
       document.getElementById('udWaBtn').href = `https://wa.me/${item.hp}?text=Halo%20${encodeURIComponent(item.pemilik)},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(item.nama)}`;
 
       const pDiv = document.getElementById('udProducts');
-      pDiv.innerHTML = item.products.map(p => `<span class="pill pill-gold">${p}</span>`).join('');
+      const products = Array.isArray(item.products) ? item.products : [];
+      pDiv.innerHTML = products.map(p => `<span class="pill pill-gold">${p}</span>`).join('');
 
       const sec = document.getElementById('umkmDetailSection');
       sec.style.display = 'block';

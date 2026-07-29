@@ -7,7 +7,6 @@
     <title>Admin Dashboard — Nagari Kubang Koto Berapak</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
@@ -15,9 +14,10 @@
         <!-- SIDEBAR -->
         <aside class="admin-sidebar">
             <div class="admin-brand">
+                <img src="{{ asset('icon.jpeg') }}" alt="Logo Pesisir Selatan" style="width:38px; height:38px; border-radius:8px; object-fit:contain; background:#ffffff; padding:2px; box-shadow:0 2px 6px rgba(0,0,0,0.15); flex-shrink:0;">
                 <div>
-                    <strong>Admin Panel</strong><br>
-                    <small style="opacity:0.8;">Kubang Koto Berapak</small>
+                    <strong style="font-size:14px; font-weight:800; color:#fff;">Admin Panel</strong><br>
+                    <small style="opacity:0.8; font-size:11px;">Kubang Koto Berapak</small>
                 </div>
             </div>
 
@@ -25,17 +25,26 @@
                 <a href="{{ route('dashboard') }}" class="admin-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     Dashboard
                 </a>
-                <a href="{{ route('admin.harvests.index') }}" class="admin-link {{ request()->routeIs('admin.harvests.*') ? 'active' : '' }}">
-                    Kelola Data Panen
+                <a href="{{ route('admin.berita.index') }}" class="admin-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
+                    Kelola Berita &amp; Kegiatan
+                </a>
+                <a href="{{ route('admin.umkm.index') }}" class="admin-link {{ request()->routeIs('admin.umkm.*') ? 'active' : '' }}">
+                    Kelola UMKM
+                </a>
+                <a href="{{ route('admin.kelompok-tani.index') }}" class="admin-link {{ request()->routeIs('admin.kelompok-tani.*') ? 'active' : '' }}">
+                    Kelola Kelompok Tani
                 </a>
                 <a href="{{ route('admin.struktur.edit') }}" class="admin-link {{ request()->routeIs('admin.struktur.*') ? 'active' : '' }}">
                     Kelola Struktur Nagari
                 </a>
                 <a href="{{ route('admin.lembaga.edit') }}" class="admin-link {{ request()->routeIs('admin.lembaga.*') ? 'active' : '' }}">
-                    Kelola Lembaga Nagari
+                    Kelola Lembaga
                 </a>
-                <a href="{{ route('home') }}" class="admin-link" target="_blank">
-                    Lihat Website Utama
+                <a href="{{ route('admin.galeri.index') }}" class="admin-link {{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
+                    Kelola Galeri
+                </a>
+                <a href="{{ route('admin.harvests.index') }}" class="admin-link {{ request()->routeIs('admin.harvests.*') ? 'active' : '' }}">
+                    Kelola Data Panen
                 </a>
                 <a href="{{ route('profile.edit') }}" class="admin-link {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
                     Pengaturan Akun
@@ -54,8 +63,8 @@
         <div class="admin-main">
             <div class="admin-topbar">
                 <div>
-                    <h2>Panel Administrasi Nagari</h2>
-                    <p>Selamat datang kembali, kelola data panen, struktur, dan lembaga nagari di sini.</p>
+                    <h2>@yield('header_title', 'Dashboard')</h2>
+                    <p>@yield('header_subtitle', 'Selamat datang kembali, kelola konten website nagari di sini.')</p>
                 </div>
                 <div class="admin-profile">
                     <div class="admin-avatar">

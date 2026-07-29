@@ -2,8 +2,16 @@
 
 use App\Http\Controllers\Admin\HarvestController;
 use App\Http\Controllers\Admin\StrukturLembagaController;
+use App\Http\Controllers\Admin\BeritaController;
+use App\Http\Controllers\Admin\UmkmController;
+use App\Http\Controllers\Admin\KelompokTaniController;
+use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\PublicHarvestController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Berita;
+use App\Models\Umkm;
+use App\Models\KelompokTani;
+use App\Models\Galeri;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +24,22 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::get('/pertanian', function () {
-    return view('pertanian');
+    $kelompokTanis = KelompokTani::all()->map(function($kt) {
+        return [
+            'id' => 'kt-'.$kt->id,
+            'nama' => $kt->nama_kelompok,
+            'ketua' => $kt->ketua,
+            'hp' => '6281234567890',
+            'alamat' => $kt->jorong,
+            'anggota' => $kt->jumlah_anggota,
+            'luas' => $kt->luas_lahan,
+            'komoditas' => $kt->komoditas_utama,
+            'produktivitas' => $kt->produktivitas,
+            'status' => $kt->status,
+            'members' => [],
+        ];
+    })->values();
+    return view('pertanian', compact('kelompokTanis'));
 })->name('pertanian');
 
 Route::get('/Sejarah', function () {
@@ -56,24 +79,41 @@ Route::get('/lembaga', function () {
 })->name('lembaga');
 
 Route::get('/umkm', function () {
-    return view('umkm');
+    $umkms = Umkm::all();
+    return view('umkm', compact('umkms'));
 })->name('umkm');
 
 Route::get('/galeri', function () {
-    return view('galeri');
+    $galeris = Galeri::all();
+    return view('galeri', compact('galeris'));
 })->name('galeri');
+
+Route::get('/berita', function () {
+    $beritas = Berita::terbit()->latest('tanggal_terbit')->paginate(9);
+    return view('berita', compact('beritas'));
+})->name('berita');
+
+Route::get('/berita/{slug}', function ($slug) {
+    $berita = Berita::where('slug', $slug)->where('status', 'Terbit')->firstOrFail();
+    return view('berita-detail', compact('berita'));
+})->name('berita.show');
 
 Route::get('/harvest/{public_code}', [PublicHarvestController::class, 'show'])
     ->name('harvest.public');
-    
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    Route::view('/harvests/uml', 'admin.harvests.uml')
-            ->name('harvests.uml');
+    Route::view('/harvests/uml', 'admin.harvests.uml')->name('harvests.uml');
     Route::resource('harvests', HarvestController::class);
+
+    // Berita, UMKM, Kelompok Tani, Galeri
+    Route::resource('berita', BeritaController::class)->except(['show']);
+    Route::resource('umkm', UmkmController::class)->except(['show']);
+    Route::resource('kelompok-tani', KelompokTaniController::class)->except(['show']);
+    Route::resource('galeri', GaleriController::class)->only(['index', 'create', 'store', 'destroy']);
 
     // Dynamic Admin Management for Struktur & Lembaga
     Route::get('/struktur', [StrukturLembagaController::class, 'editStruktur'])->name('struktur.edit');
