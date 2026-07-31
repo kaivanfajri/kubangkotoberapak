@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Umkm;
 use App\Models\KelompokTani;
 use App\Models\Galeri;
 
@@ -12,53 +11,7 @@ class NagariSeeder extends Seeder
     public function run(): void
     {
         // =============================================
-        // 1. DATA UMKM (4 usaha dari JS hardcode lama)
-        // =============================================
-        $umkms = [
-            [
-                'nama_usaha' => 'Rendang & Kalio Uni Wilda',
-                'pemilik' => 'Uni Wilda',
-                'kategori' => 'Kuliner',
-                'alamat' => 'Jorong Durian Taba',
-                'nomor_wa' => '6281234567890',
-                'deskripsi' => 'Rendang daging sapi khas Minang racikan bumbu rempah kelapa sangrai alami dari kebun Nagari Kubang.',
-                'produk_utama' => json_encode(['Rendang Daging (250g/500g)', 'Kalio Daging', 'Serundeng Kelapa']),
-            ],
-            [
-                'nama_usaha' => 'Keripik Balado Sokan',
-                'pemilik' => 'Ibu Fatimah',
-                'kategori' => 'Kuliner',
-                'alamat' => 'Jorong Sungai Tapuh',
-                'nomor_wa' => '6281234567891',
-                'deskripsi' => 'Keripik singkong balado pedas manis buatan olahan rumahan yang renyah dan gurih.',
-                'produk_utama' => json_encode(['Keripik Balado Merah', 'Keripik Sanjai Plastik', 'Keripik Pisang']),
-            ],
-            [
-                'nama_usaha' => 'Kopi Bubuk Nagari',
-                'pemilik' => 'Pak Malin',
-                'kategori' => 'Sembako',
-                'alamat' => 'Jorong Pintu Rayo',
-                'nomor_wa' => '6281234567892',
-                'deskripsi' => 'Kopi Robusta asli dipetik dari kebun perbukitan Nagari Kubang, disangrai secara tradisional.',
-                'produk_utama' => json_encode(['Kopi Bubuk Murni (100g)', 'Kopi Arabika Bayang']),
-            ],
-            [
-                'nama_usaha' => 'Kain Tenun Bayang',
-                'pemilik' => 'Kak Ros',
-                'kategori' => 'Kerajinan',
-                'alamat' => 'Jorong Ikua Koto',
-                'nomor_wa' => '6281234567893',
-                'deskripsi' => 'Kerajinan selendang dan sarung tenun tradisional Minangkabau dengan motif ukiran adat lokal.',
-                'produk_utama' => json_encode(['Selendang Tenun', 'Songket Motif Bayang', 'Syal Mini']),
-            ],
-        ];
-
-        foreach ($umkms as $u) {
-            Umkm::firstOrCreate(['nama_usaha' => $u['nama_usaha']], $u);
-        }
-
-        // =============================================
-        // 2. DATA KELOMPOK TANI (7 kelompok dari JS lama)
+        // 1. DATA KELOMPOK TANI (7 kelompok dari JS lama)
         // =============================================
         $kelompokTanis = [
             ['nama_kelompok' => 'Kelompok Tani Durian Taba', 'ketua' => 'H. Zulkifli', 'jorong' => 'Jorong Durian Taba', 'jumlah_anggota' => 22, 'luas_lahan' => '20 Ha', 'komoditas_utama' => 'Padi Sokan', 'produktivitas' => '6.1 Ton/Ha/Musim', 'status' => 'Aktif'],
@@ -75,9 +28,7 @@ class NagariSeeder extends Seeder
         }
 
         // =============================================
-        // 3. DATA GALERI (14 foto dari JS hardcode lama)
-        // Catatan: file gambar ini ada di public/ (asset statis),
-        // bukan di storage/. Maka path diisi relatif ke public.
+        // 2. DATA GALERI (14 foto dari JS hardcode lama)
         // =============================================
         $galeris = [
             ['caption' => 'Pemandangan Persawahan Nagari Kubang', 'kategori' => 'Adat & Sejarah', 'gambar' => 'galeri/Profil2.JPG'],
