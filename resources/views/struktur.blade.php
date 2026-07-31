@@ -4,9 +4,10 @@
 
 @section('content')
   <!-- HERO BANNER -->
-  <div class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('{{ asset('kantorwalinagari.jpg') }}'); background-position: center; background-size: cover; padding: 60px 20px 46px;">
+  <div class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.45)), url('{{ asset('kantorwalinagari.jpg') }}'); background-position: center 55%; background-size: cover; min-height: 440px; padding: 75px 20px 50px;">
     <div class="hero-content" style="max-width: 900px; margin: 0 auto; text-align: center;">
-      <h1 style="font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: #fff; margin-bottom: 6px; font-family: 'Poppins', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.7);">
+      <span class="hero-badge">Pemerintahan Nagari</span>
+      <h1 style="font-size: clamp(1.6rem, 3.2vw, 2.5rem); font-weight: 800; color: #fff; margin-bottom: 6px; font-family: 'Poppins', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.7);">
         Struktur Organisasi Nagari
       </h1>
       <p class="hero-sub" style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.95); font-weight: 400; max-width: 600px; margin: 0 auto; text-shadow: 0 1px 6px rgba(0,0,0,0.7);">
@@ -17,38 +18,38 @@
 
   @php
     $pemerintah = $strukturData['pemerintah'] ?? [
-      ['jabatan' => 'Wali Nagari', 'nama' => 'NOVRIADI', 'foto' => null],
-      ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E', 'foto' => null],
-      ['jabatan' => 'Kaur Perencanaan', 'nama' => 'IRWANSYAH', 'foto' => null],
-      ['jabatan' => 'Kaur Keuangan', 'nama' => 'IBNU NURSIDIQ', 'foto' => null],
-      ['jabatan' => 'Kaur TU & Umum', 'nama' => 'DAYU NIRMALA DEWI S.E', 'foto' => null],
-      ['jabatan' => 'Kasi Pemerintahan', 'nama' => 'LIRA MARLINA', 'foto' => null],
-      ['jabatan' => 'Kasi Kesejahteraan dan Pelayanan', 'nama' => 'DITA MILENIA S.Si', 'foto' => null],
-      ['jabatan' => 'Staf Nagari', 'nama' => 'ALVI MAHENDRA', 'foto' => null],
-      ['jabatan' => 'Staf Bamus', 'nama' => 'WELLA SILVIKA S.Pd.I', 'foto' => null],
-      ['jabatan' => 'Wali Kampung Kubang', 'nama' => 'EM ROMI', 'foto' => null],
-      ['jabatan' => 'Wali Kampung Lembah Gumanti', 'nama' => 'WAN FEBRINDO S.Pd', 'foto' => null]
+      ['jabatan' => 'Wali Nagari', 'nama' => 'NOVRIADI'],
+      ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E'],
+      ['jabatan' => 'Kaur Perencanaan', 'nama' => 'IRWANSYAH'],
+      ['jabatan' => 'Kaur Keuangan', 'nama' => 'IBNU NURSIDIQ'],
+      ['jabatan' => 'Kaur TU & Umum', 'nama' => 'DAYU NIRMALA DEWI S.E'],
+      ['jabatan' => 'Kasi Pemerintahan', 'nama' => 'LIRA MARLINA'],
+      ['jabatan' => 'Kasi Kesejahteraan dan Pelayanan', 'nama' => 'DITA MILENIA S.Si'],
+      ['jabatan' => 'Staf Nagari', 'nama' => 'ALVI MAHENDRA'],
+      ['jabatan' => 'Staf Bamus', 'nama' => 'WELLA SILVIKA S.Pd.I'],
+      ['jabatan' => 'Wali Kampung Kubang', 'nama' => 'EM ROMI'],
+      ['jabatan' => 'Wali Kampung Lembah Gumanti', 'nama' => 'WAN FEBRINDO S.Pd']
     ];
 
     $bamus = $strukturData['bamus'] ?? [
-      ['jabatan' => 'Ketua', 'nama' => 'WAHYU RESTU SAPUTRA Pnk. Dt Bagindo Rajo', 'foto' => null],
-      ['jabatan' => 'Wakil Ketua', 'nama' => 'VENDRIANTO', 'foto' => null],
-      ['jabatan' => 'Sekretaris', 'nama' => 'NELLA AMELIA', 'foto' => null],
-      ['jabatan' => 'Anggota', 'nama' => 'SANJU YUSAFRINANDA', 'foto' => null],
-      ['jabatan' => 'Anggota', 'nama' => 'ILHAM S.Pd.I', 'foto' => null]
+      ['jabatan' => 'Ketua', 'nama' => 'WAHYU RESTU SAPUTRA Pnk. Dt Bagindo Rajo'],
+      ['jabatan' => 'Wakil Ketua', 'nama' => 'VENDRIANTO'],
+      ['jabatan' => 'Sekretaris', 'nama' => 'NELLA AMELIA'],
+      ['jabatan' => 'Anggota', 'nama' => 'SANJU YUSAFRINANDA'],
+      ['jabatan' => 'Anggota', 'nama' => 'ILHAM S.Pd.I']
     ];
 
     $lpmn = $strukturData['lpmn'] ?? [
-      ['jabatan' => 'Ketua', 'nama' => 'Yusmardi DT. Mandaro Kayo', 'foto' => null],
-      ['jabatan' => 'Sekretaris', 'nama' => 'Marjuliadi', 'foto' => null],
-      ['jabatan' => 'Bendahara', 'nama' => 'Marjan Delmi PNK. DT. Rky Basa', 'foto' => null]
+      ['jabatan' => 'Ketua', 'nama' => 'Yusmardi DT. Mandaro Kayo'],
+      ['jabatan' => 'Sekretaris', 'nama' => 'Marjuliadi'],
+      ['jabatan' => 'Bendahara', 'nama' => 'Marjan Delmi PNK. DT. Rky Basa']
     ];
 
     $slogan = $strukturData['slogan'] ?? 'Basamo Mangko Manjadi';
 
     // Separate government roles
-    $wali = current(array_filter($pemerintah, fn($p) => strtolower($p['jabatan']) == 'wali nagari')) ?: ['jabatan' => 'Wali Nagari', 'nama' => 'NOVRIADI', 'foto' => null];
-    $sekretaris = current(array_filter($pemerintah, fn($p) => strtolower($p['jabatan']) == 'sekretaris nagari')) ?: ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E', 'foto' => null];
+    $wali = current(array_filter($pemerintah, fn($p) => strtolower($p['jabatan']) == 'wali nagari')) ?: ['jabatan' => 'Wali Nagari', 'nama' => 'NOVRIADI'];
+    $sekretaris = current(array_filter($pemerintah, fn($p) => strtolower($p['jabatan']) == 'sekretaris nagari')) ?: ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E'];
     
     $perangkatStaff = array_filter($pemerintah, function($p) {
       $j = strtolower($p['jabatan']);
@@ -174,7 +175,7 @@
       background: #d97706;
     }
 
-    /* MEMBER MINI CARDS WITH AVATAR */
+    /* MEMBER MINI CARDS WITH AVATAR BADGES */
     .mini-card {
       border: 1px solid #e2e8f0;
       border-radius: 12px;
@@ -209,12 +210,6 @@
       overflow: hidden;
       box-shadow: 0 3px 8px rgba(0,0,0,0.1);
       border: 2px solid #ffffff;
-    }
-
-    .mini-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
 
     .mini-info {
@@ -354,11 +349,7 @@
           @foreach($bamus as $b)
             <div class="mini-card" style="border-left: 3px solid #0288d1;">
               <div class="mini-avatar" style="background: linear-gradient(135deg, #0288d1, #0284c7);">
-                @if(!empty($b['foto']))
-                  <img src="{{ asset('storage/'.$b['foto']) }}" alt="{{ $b['nama'] }}">
-                @else
-                  {{ getInitials($b['nama']) }}
-                @endif
+                {{ getInitials($b['nama']) }}
               </div>
               <div class="mini-info">
                 <div class="mini-jabatan" style="color: #0288d1;">{{ $b['jabatan'] }}</div>
@@ -377,11 +368,7 @@
           <!-- WALI NAGARI -->
           <div class="featured-leader-card featured-wali">
             <div class="mini-avatar leader-avatar" style="background: linear-gradient(135deg, #1B5E20, #2E7D32);">
-              @if(!empty($wali['foto']))
-                <img src="{{ asset('storage/'.$wali['foto']) }}" alt="{{ $wali['nama'] }}">
-              @else
-                {{ getInitials($wali['nama']) }}
-              @endif
+              {{ getInitials($wali['nama']) }}
             </div>
             <div class="mini-jabatan" style="color: var(--green-dark); font-size: 11px; font-weight: 800;">{{ $wali['jabatan'] }}</div>
             <div style="font-size: 14.5px; font-weight: 800; color: var(--green-dark); margin-top: 1px; word-break: break-word;">{{ $wali['nama'] }}</div>
@@ -390,11 +377,7 @@
           <!-- SEKRETARIS NAGARI -->
           <div class="featured-leader-card featured-seknag">
             <div class="mini-avatar leader-avatar" style="background: linear-gradient(135deg, #0288d1, #0369a1); width: 46px; height: 46px; font-size: 15px;">
-              @if(!empty($sekretaris['foto']))
-                <img src="{{ asset('storage/'.$sekretaris['foto']) }}" alt="{{ $sekretaris['nama'] }}">
-              @else
-                {{ getInitials($sekretaris['nama']) }}
-              @endif
+              {{ getInitials($sekretaris['nama']) }}
             </div>
             <div class="mini-jabatan" style="color: #0288d1; font-size: 10.5px;">{{ $sekretaris['jabatan'] }}</div>
             <div style="font-size: 13px; font-weight: 800; color: var(--ink); margin-top: 1px; word-break: break-word;">{{ $sekretaris['nama'] }}</div>
@@ -405,11 +388,7 @@
             @foreach($perangkatStaff as $p)
               <div class="mini-card" style="margin-bottom: 0;">
                 <div class="mini-avatar" style="background: linear-gradient(135deg, #388e3c, #66bb6a); width: 36px; height: 36px; font-size: 11px;">
-                  @if(!empty($p['foto']))
-                    <img src="{{ asset('storage/'.$p['foto']) }}" alt="{{ $p['nama'] }}">
-                  @else
-                    {{ getInitials($p['nama']) }}
-                  @endif
+                  {{ getInitials($p['nama']) }}
                 </div>
                 <div class="mini-info">
                   <div class="mini-jabatan" style="color: var(--green); font-size: 9px;">{{ $p['jabatan'] }}</div>
@@ -427,11 +406,7 @@
                 @foreach($waliKampung as $wk)
                   <div class="mini-card" style="border-left: 3px solid var(--gold-dark); background: #fffdf5; margin-bottom: 0;">
                     <div class="mini-avatar" style="background: linear-gradient(135deg, #d97706, #f59e0b); width: 36px; height: 36px; font-size: 11px;">
-                      @if(!empty($wk['foto']))
-                        <img src="{{ asset('storage/'.$wk['foto']) }}" alt="{{ $wk['nama'] }}">
-                      @else
-                        {{ getInitials($wk['nama']) }}
-                      @endif
+                      {{ getInitials($wk['nama']) }}
                     </div>
                     <div class="mini-info">
                       <div class="mini-jabatan" style="color: #b45309; font-size: 9px;">{{ $wk['jabatan'] }}</div>
@@ -453,11 +428,7 @@
           @foreach($lpmn as $l)
             <div class="mini-card" style="border-left: 3px solid #d97706; background: #fffdf5;">
               <div class="mini-avatar" style="background: linear-gradient(135deg, #b45309, #d97706);">
-                @if(!empty($l['foto']))
-                  <img src="{{ asset('storage/'.$l['foto']) }}" alt="{{ $l['nama'] }}">
-                @else
-                  {{ getInitials($l['nama']) }}
-                @endif
+                {{ getInitials($l['nama']) }}
               </div>
               <div class="mini-info">
                 <div class="mini-jabatan" style="color: #d97706;">{{ $l['jabatan'] }}</div>
