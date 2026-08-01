@@ -58,5 +58,10 @@
             </tbody>
         </table>
     </div>
-    <div style="margin-top:20px;">{{ $kelompokTanis->links() }}</div>
+    <div style="margin-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div>{{ $kelompokTanis->links() }}</div>
+        <a href="{{ route('admin.kelompok-tani.create') }}" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; border-radius:24px; padding:10px 22px; font-weight:700; text-decoration:none; font-size:13.5px; box-shadow:0 4px 12px rgba(46,125,50,0.25); display:inline-flex; align-items:center; gap:6px;">
+            + Tambah Kelompok Tani Baru
+        </a>
+    </div>
 @endsection

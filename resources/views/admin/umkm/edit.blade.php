@@ -35,8 +35,8 @@
                         </select>
                     </div>
                     <div>
-                        <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Nomor WhatsApp</label>
-                        <input type="text" name="nomor_wa" value="{{ old('nomor_wa', $umkm->nomor_wa) }}" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
+                        <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Nomor WhatsApp (opsional)</label>
+                        <input type="text" name="nomor_wa" value="{{ old('nomor_wa', $umkm->nomor_wa) }}" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
                     </div>
                     <div>
                         <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Jam Operasional</label>
@@ -50,11 +50,24 @@
                 </div>
 
                 <div style="margin-bottom:16px;">
-                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Foto Produk (kosongkan jika tidak ganti)</label>
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Foto Sampul Utama (kosongkan jika tidak ganti)</label>
                     @if($umkm->foto)
                         <div style="margin-bottom:8px;"><img src="{{ asset('storage/'.$umkm->foto) }}" style="max-height:100px; border-radius:10px;"></div>
                     @endif
                     <input type="file" name="foto" accept="image/*" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Tambah Foto Galeri &amp; Slider (Bisa Pilih Banyak Foto 📸)</label>
+                    @if(!empty($umkm->galeri_foto) && is_array($umkm->galeri_foto))
+                        <div style="display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+                            @foreach($umkm->galeri_foto as $gFoto)
+                                <img src="{{ asset('storage/'.$gFoto) }}" style="width:70px; height:70px; object-fit:cover; border-radius:8px; border:1px solid #ddd;">
+                            @endforeach
+                        </div>
+                    @endif
+                    <input type="file" name="galeri_foto[]" multiple accept="image/*" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
+                    <small style="color:var(--muted); font-size:11.5px;">Foto yang diunggah baru akan ditambahkan ke galeri slider UMKM.</small>
                 </div>
 
                 <div style="margin-bottom:16px;">
@@ -67,9 +80,11 @@
                     <textarea name="deskripsi" rows="4" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit; font-size:14px; line-height:1.7;">{{ old('deskripsi', $umkm->deskripsi) }}</textarea>
                 </div>
 
-                <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:12px 28px; font-size:15px; font-weight:700; border-radius:24px; width:100%; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25);">
-                    Simpan Perubahan UMKM
-                </button>
+                <div style="text-align:right;">
+                    <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:10px 24px; font-size:14px; font-weight:700; border-radius:24px; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25); display:inline-flex; align-items:center; gap:6px;">
+                        ✓ Simpan Perubahan UMKM
+                    </button>
+                </div>
             </div>
         </form>
     </div>

@@ -34,9 +34,11 @@
                     <input type="file" name="gambar" accept="image/*" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
                 </div>
 
-                <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:12px 28px; font-size:15px; font-weight:700; border-radius:24px; width:100%; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25);">
-                    Unggah Foto ke Galeri
-                </button>
+                <div style="text-align:right;">
+                    <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:10px 24px; font-size:14px; font-weight:700; border-radius:24px; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25); display:inline-flex; align-items:center; gap:6px;">
+                        ✓ Unggah Foto ke Galeri
+                    </button>
+                </div>
             </div>
         </form>
     </div>

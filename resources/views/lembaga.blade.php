@@ -4,7 +4,7 @@
 
 @section('content')
   <!-- HERO BANNER -->
-  <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1600&auto=format&fit=crop')">
+  <div class="hero" style="background-image: url('{{ asset('kantorwalinagari.jpg') }}')">
     <div class="hero-content">
       <span class="hero-badge">Kelembagaan</span>
       <h1>Lembaga Nagari Kubang Koto Berapak</h1>
@@ -102,19 +102,36 @@
         return;
       }
 
+      const imgPemerintahan = "{{ asset('kantorwalinagari.jpg') }}";
+      const imgPendidikan = "{{ asset('Sejarah4.jpeg') }}";
+      const imgKesehatan = "{{ asset('Profil2.JPG') }}";
+      const imgPemuda = "{{ asset('Profil3.JPG') }}";
+
       grid.innerHTML = items.map(item => {
         const kat = item.kategori || 'Lembaga Nagari';
         let pillClass = 'pill-gold';
-        if (kat.includes('Pendidikan')) pillClass = 'pill-blue';
-        else if (kat.includes('Kesehatan')) pillClass = 'pill-green';
+        let cardBgImg = imgPemerintahan;
+        if (kat.includes('Pendidikan')) {
+          pillClass = 'pill-blue';
+          cardBgImg = imgPendidikan;
+        } else if (kat.includes('Kesehatan')) {
+          pillClass = 'pill-green';
+          cardBgImg = imgKesehatan;
+        } else if (kat.includes('Pemuda')) {
+          pillClass = 'pill-gold';
+          cardBgImg = imgPemuda;
+        }
 
         return `
-          <div class="card clickable card-hover" onclick="showLembagaDetail('${item.id}')">
-            <div class="card-body">
-              <span class="pill ${pillClass}">${kat}</span>
-              <h4 style="margin-top:10px;">${item.nama}</h4>
-              <p style="font-size:13px; margin-bottom:10px;">Ketua/Pimpinan: <strong>${item.ketua}</strong></p>
-              <p style="font-size:13px; color:var(--muted); line-height:1.5;">${(item.desc || '').substring(0, 85)}...</p>
+          <div class="card clickable card-hover" onclick="showLembagaDetail('${item.id}')" style="overflow:hidden; display:flex; flex-direction:column;">
+            <div class="card-img" style="height:150px; background-image:url('${cardBgImg}'); background-size:cover; background-position:center;"></div>
+            <div class="card-body" style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:20px;">
+              <div>
+                <span class="pill ${pillClass}">${kat}</span>
+                <h4 style="margin-top:10px;">${item.nama}</h4>
+                <p style="font-size:13px; margin-bottom:10px;">Ketua/Pimpinan: <strong>${item.ketua}</strong></p>
+                <p style="font-size:13px; color:var(--muted); line-height:1.5;">${(item.desc || '').substring(0, 85)}...</p>
+              </div>
               <div style="margin-top:12px; font-size:12px; color:var(--green-dark); font-weight:600;">
                 Kapasitas / Anggota: ${item.anggota}
               </div>
@@ -133,7 +150,14 @@
       document.getElementById('ldKategori').innerText = item.kategori || 'Lembaga Nagari';
       document.getElementById('ldAnggota').innerText = item.anggota;
       document.getElementById('ldDesc').innerText = item.desc;
-      document.getElementById('ldWaBtn').href = `https://wa.me/${item.hp || '6281234567890'}?text=Halo%20Pimpinan%20${encodeURIComponent(item.nama)}`;
+
+      const waBtn = document.getElementById('ldWaBtn');
+      if (item.hp && item.hp.trim() !== '') {
+        waBtn.style.display = 'inline-flex';
+        waBtn.href = `https://wa.me/${item.hp.trim()}?text=Halo%20Pimpinan%20${encodeURIComponent(item.nama)}`;
+      } else {
+        waBtn.style.display = 'none';
+      }
 
       const sec = document.getElementById('lembagaDetailSection');
       sec.style.display = 'block';

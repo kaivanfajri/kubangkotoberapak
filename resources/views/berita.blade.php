@@ -20,13 +20,25 @@
 
       <div class="grid grid-3 reveal" style="margin-top:26px;">
         @forelse($beritas as $berita)
-          <a href="{{ route('berita.show', $berita->slug) }}" class="card clickable card-hover" style="text-decoration:none; color:inherit;">
+          <a href="{{ $berita->link_artikel ?: route('berita.show', $berita->slug) }}" @if($berita->link_artikel) target="_blank" @endif class="card clickable card-hover" style="text-decoration:none; color:inherit;">
             <div class="card-img" style="background-image:url('{{ $berita->gambar ? asset('storage/'.$berita->gambar) : asset('Profil2.JPG') }}')"></div>
             <div class="card-body">
-              <span class="pill">{{ $berita->kategori }}</span>
-              <h4 style="margin-top:6px;">{{ $berita->judul }}</h4>
-              <p style="font-size:13px; color:var(--muted); line-height:1.5;">{{ Str::limit(strip_tags($berita->konten), 100) }}</p>
-              <div style="margin-top:10px; font-size:12px; color:var(--green-dark); font-weight:600;">{{ $berita->tanggal_terbit->format('d M Y') }}</div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="pill">{{ $berita->kategori }}</span>
+                @if($berita->link_artikel)
+                  <span class="pill pill-gold" style="font-size:10px;">Link Luar ↗</span>
+                @endif
+              </div>
+              <h4 style="margin-top:8px;">{{ $berita->judul }}</h4>
+              <p style="font-size:13px; color:var(--muted); line-height:1.5;">
+                {{ Str::limit(strip_tags($berita->konten ?: $berita->judul), 100) }}
+              </p>
+              <div style="margin-top:12px; font-size:12px; color:var(--green-dark); font-weight:600; display:flex; justify-content:space-between; align-items:center;">
+                <span>{{ $berita->tanggal_terbit->format('d M Y') }}</span>
+                @if($berita->link_artikel)
+                  <span style="color:#0288d1; font-weight:700;">Baca Artikel ↗</span>
+                @endif
+              </div>
             </div>
           </a>
         @empty

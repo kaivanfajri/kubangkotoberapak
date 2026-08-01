@@ -1,110 +1,170 @@
 @extends('layouts.nagari')
 
-@section('title', 'Katalog UMKM & Beras Nagari — Nagari Kubang Koto Berapak')
+@section('title', 'Katalog UMKM — Nagari Kubang Koto Berapak')
 
 @section('content')
   <!-- HERO BANNER -->
-  <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1600&auto=format&fit=crop')">
+  <div class="hero" style="background-image: url('{{ asset('Komoditi10.jpeg') }}')">
     <div class="hero-content">
       <span class="hero-badge">Ekonomi Nagari</span>
       <h1>Katalog Digital UMKM Nagari Kubang</h1>
-      <p class="hero-sub">Pemasaran produk usaha mikro masyarakat, olahan pangan lokal, kerajinan tangan, dan produk Beras Nagari unggulan.</p>
+      <p class="hero-sub">Pemasaran produk usaha mikro masyarakat, olahan pangan lokal, kerajinan tangan, dan potensi ekonomi nagari.</p>
     </div>
   </div>
 
-  <!-- TOOLBAR & CATALOG SECTION -->
-  <div class="section">
+  @php
+    $featuredUmkm = $umkms->first();
+  @endphp
+
+  <!-- MAIN FEATURED UMKM SHOWCASE SECTION -->
+  <div class="section" style="padding-top:40px; padding-bottom:50px;">
     <div class="wrap">
-      <!-- SEARCH & FILTER TOOLBAR -->
-      <div class="toolbar reveal">
-        <input type="text" id="umkmSearch" placeholder="Cari nama usaha atau produk..." oninput="filterUmkm()">
-        <select id="umkmKategori" onchange="filterUmkm()">
-          <option value="">Semua Kategori</option>
-          <option value="Beras Nagari">Beras Nagari</option>
-          <option value="Kuliner">Kuliner & Olahan</option>
-          <option value="Kerajinan">Kerajinan Tangan</option>
-          <option value="Sembako">Sembako & Hasil Bumi</option>
-        </select>
-        <select id="umkmSort" onchange="filterUmkm()">
-          <option value="az">Urutkan A – Z</option>
-          <option value="za">Urutkan Z – A</option>
-        </select>
-      </div>
+      <div class="eyebrow">Usaha Unggulan Nagari</div>
+      <h2 class="section-title reveal">Profil &amp; Galeri UMKM Nagari</h2>
 
-      <!-- UMKM GRID -->
-      <div class="grid grid-4 reveal" id="umkmGrid">
-        <!-- Rendered by JS -->
-      </div>
+      @if($featuredUmkm)
+        <div class="card reveal" style="border-radius:24px; overflow:hidden; border:1.5px solid #e2e8f0; background:#ffffff; box-shadow:0 12px 35px -10px rgba(0,0,0,0.08); margin-top:20px;">
+          <div style="display:grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);" class="umkm-showcase-grid">
+            
+            <!-- LEFT SLIDER CAROUSEL (CLEAN FULL-BLEED SLIDER) -->
+            <div style="position:relative; min-height:420px; height:100%; background:#f8fafc; overflow:hidden;" id="sliderContainer" onmouseenter="stopAutoSlide()" onmouseleave="startAutoSlide()">
+              
+              @php
+                $slides = !empty($featuredUmkm['gallery']) ? $featuredUmkm['gallery'] : [$featuredUmkm['img']];
+              @endphp
 
-      <!-- KATALOG BERAS NAGARI SECTION -->
-      <div class="eyebrow" style="margin-top: 60px;">Komoditas Unggulan</div>
-      <h2 class="section-title reveal">Katalog Beras Nagari Kubang</h2>
-      <p style="color:var(--muted); font-size:14px; margin-bottom: 24px;">Beras kuliner khas hasil panen persawahan Nagari Kubang yang diproses secara alami dan perah.</p>
+              <!-- SLIDE IMAGES -->
+              @foreach($slides as $idx => $slideImg)
+                <div class="umkm-slide-item {{ $idx === 0 ? 'active' : '' }}" style="position:absolute; inset:0; opacity: {{ $idx === 0 ? '1' : '0' }}; transition: opacity 0.5s ease-in-out; background-image:url('{{ $slideImg }}'); background-size:cover; background-position:center;"></div>
+              @endforeach
 
-      <div class="grid grid-3 reveal" id="berasGrid">
-        <div class="card clickable card-hover">
-          <div class="card-img" style="background-image:url('{{ asset('Durian taba.jpeg') }}')"></div>
-          <div class="card-body">
-            <span class="pill pill-gold">Beras Unggulan</span>
-            <h4 style="margin-top:6px;">Beras Cisokan Kubang</h4>
-            <div style="font-size:18px; font-weight:800; color:var(--gold-dark); margin:4px 0;">Rp 16.000 <span style="font-size:12px; color:var(--muted); font-weight:400;">/ kg</span></div>
-            <p style="font-size:13px;">Beras tekstur perah khas Minang, sangat cocok untuk hidangan rumah makan dan nasi padang.</p>
-            <a class="btn btn-wa btn-sm" style="margin-top:12px;" href="https://wa.me/6281234567890?text=Saya%20ingin%20memesan%20Beras%20Cisokan%20Kubang" target="_blank">Pesan via WA</a>
+              <!-- BADGE COUNTER TOP LEFT -->
+              <div style="position:absolute; top:16px; left:16px; background:rgba(0,0,0,0.65); backdrop-filter:blur(8px); color:#fff; font-size:11.5px; font-weight:700; padding:5px 14px; border-radius:20px; border:1px solid rgba(255,255,255,0.25); z-index:3; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+                📸 <span id="slideCounter">1 / {{ count($slides) }}</span>
+              </div>
+
+              <!-- SLIDER ARROWS LEFT & RIGHT -->
+              @if(count($slides) > 1)
+                <button type="button" onclick="prevSlide()" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.85); backdrop-filter:blur(4px); border:none; cursor:pointer; font-weight:800; color:var(--ink); box-shadow:0 4px 14px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; font-size:16px; z-index:4; transition:all 0.2s;" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='rgba(255,255,255,0.85)'">❮</button>
+                <button type="button" onclick="nextSlide()" style="position:absolute; right:14px; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.85); backdrop-filter:blur(4px); border:none; cursor:pointer; font-weight:800; color:var(--ink); box-shadow:0 4px 14px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; font-size:16px; z-index:4; transition:all 0.2s;" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='rgba(255,255,255,0.85)'">❯</button>
+
+              @endif
+
+            </div>
+
+            <!-- RIGHT DETAILS BOX -->
+            <div style="padding:32px 28px; display:flex; flex-direction:column; justify-content:space-between; background:#ffffff;">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; flex-wrap:wrap;">
+                  <span class="pill pill-gold">{{ $featuredUmkm['kategori'] }}</span>
+                  <span class="pill pill-green" style="font-size:10.5px;">✓ Terverifikasi Nagari</span>
+                </div>
+
+                <h3 style="font-size:1.6rem; font-weight:800; color:var(--green-dark); font-family:'Poppins',sans-serif; margin-bottom:6px; line-height:1.3;">
+                  {{ $featuredUmkm['nama'] }}
+                </h3>
+
+                <p style="font-size:14px; color:var(--muted); margin-bottom:16px;">
+                  Pemilik: <strong style="color:var(--ink);">{{ $featuredUmkm['pemilik'] }}</strong>
+                </p>
+
+                <!-- INFO METRICS -->
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; background:#f8faf8; padding:14px 16px; border-radius:14px; border:1px solid #e2e8f0;">
+                  <div>
+                    <span style="font-size:10.5px; font-weight:700; color:var(--muted); text-transform:uppercase; display:block; letter-spacing:0.5px;">Lokasi / Jorong</span>
+                    <strong style="font-size:13px; color:var(--green-dark);">{{ $featuredUmkm['alamat'] }}</strong>
+                  </div>
+                  <div>
+                    <span style="font-size:10.5px; font-weight:700; color:var(--muted); text-transform:uppercase; display:block; letter-spacing:0.5px;">Jam Operasional</span>
+                    <strong style="font-size:13px; color:var(--green-dark);">{{ $featuredUmkm['jam'] }}</strong>
+                  </div>
+                </div>
+
+                <!-- DESKRIPSI -->
+                <p style="font-size:13.5px; line-height:1.75; color:var(--ink); margin-bottom:20px;">
+                  {{ $featuredUmkm['desc'] }}
+                </p>
+
+                <!-- PRODUK UTAMA -->
+                @if(!empty($featuredUmkm['products']) && count($featuredUmkm['products']) > 0)
+                  <div style="margin-bottom:24px;">
+                    <span style="font-size:11px; font-weight:800; color:var(--green-dark); text-transform:uppercase; display:block; margin-bottom:8px; letter-spacing:0.5px;">Produk Utama:</span>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                      @foreach($featuredUmkm['products'] as $prod)
+                        <span style="background:#e8f5e9; color:var(--green-dark); border:1px solid #c8e6c9; padding:5px 12px; border-radius:16px; font-size:12px; font-weight:600;">
+                          {{ $prod }}
+                        </span>
+                      @endforeach
+                    </div>
+                  </div>
+                @endif
+              </div>
+
+              <!-- WHATSAPP CONTACT ACTION BUTTON -->
+              <div>
+                @if(!empty($featuredUmkm['hp']))
+                  <a href="https://wa.me/{{ trim($featuredUmkm['hp']) }}?text=Halo%20{{ urlencode($featuredUmkm['pemilik']) }},%20saya%20tertarik%20dengan%20produk%20{{ urlencode($featuredUmkm['nama']) }}" target="_blank" class="btn btn-wa" style="width:100%; justify-content:center; font-size:14.5px; font-weight:800; padding:13px 22px; border-radius:30px; box-shadow:0 6px 16px rgba(37,211,102,0.25);">
+                    💬 Pesan / Hubungi Pemilik via WhatsApp
+                  </a>
+                @else
+                  <div style="font-size:13px; color:var(--muted); font-weight:600; text-align:center; padding:12px; background:#f1f5f9; border-radius:14px;">
+                    Kontak WhatsApp Belum Didaftarkan
+                  </div>
+                @endif
+              </div>
+
+            </div>
           </div>
         </div>
-
-        <div class="card clickable card-hover">
-          <div class="card-img" style="background-image:url('{{ asset('pertanian1.JPG') }}')"></div>
-          <div class="card-body">
-            <span class="pill pill-gold">Beras Super</span>
-            <h4 style="margin-top:6px;">Beras Sokan Solok-Bayang</h4>
-            <div style="font-size:18px; font-weight:800; color:var(--gold-dark); margin:4px 0;">Rp 17.500 <span style="font-size:12px; color:var(--muted); font-weight:400;">/ kg</span></div>
-            <p style="font-size:13px;">Aroma wangi dan putih bersih tanpa pemutih buatan, dipanen langsung dari persawahan irigasi nagari.</p>
-            <a class="btn btn-wa btn-sm" style="margin-top:12px;" href="https://wa.me/6281234567890?text=Saya%20ingin%20memesan%20Beras%20Sokan" target="_blank">Pesan via WA</a>
-          </div>
+      @else
+        <div style="text-align:center; padding:50px 20px; background:#ffffff; border-radius:20px; border:1px dashed #cbd5e1; margin-top:20px;">
+          <p style="color:var(--muted); font-size:15px; font-weight:600;">Belum ada data UMKM yang diunggah di admin panel.</p>
         </div>
-
-        <div class="card clickable card-hover">
-          <div class="card-img" style="background-image:url('{{ asset('sawah balik.jpeg') }}')"></div>
-          <div class="card-body">
-            <span class="pill">Beras Organik</span>
-            <h4 style="margin-top:6px;">Beras Merah Organik</h4>
-            <div style="font-size:18px; font-weight:800; color:var(--gold-dark); margin:4px 0;">Rp 20.000 <span style="font-size:12px; color:var(--muted); font-weight:400;">/ kg</span></div>
-            <p style="font-size:13px;">Kaya serat dan serat nutrisi tinggi, diproduksi khusus oleh kelompok tani secara alami.</p>
-            <a class="btn btn-wa btn-sm" style="margin-top:12px;" href="https://wa.me/6281234567890?text=Saya%20ingin%20memesan%20Beras%20Merah%20Organik" target="_blank">Pesan via WA</a>
-          </div>
-        </div>
-      </div>
+      @endif
     </div>
   </div>
 
-  <!-- DETAIL UMKM MODAL SECTION -->
-  <div class="section section-alt" id="umkmDetailSection" style="display:none; scroll-margin-top: 90px;">
-    <div class="wrap" style="max-width:860px;">
-      <a class="back-link" onclick="closeUmkmDetail()">← Kembali ke Katalog UMKM</a>
-      <h2 class="section-title" id="udTitle">Detail Usaha UMKM</h2>
+  <!-- KATALOG UMKM LAINNYA SECTION (GRID FOR MULTIPLE UMKMs) -->
+  @if($umkms->count() > 1)
+    <div class="section section-alt">
+      <div class="wrap">
+        <div class="eyebrow">Daftar Usaha</div>
+        <h2 class="section-title reveal">Katalog UMKM Nagari Lainnya</h2>
 
-      <div class="info-grid">
-        <div class="info-box"><div class="k">Pemilik Usaha</div><div class="v" id="udPemilik">-</div></div>
-        <div class="info-box"><div class="k">Kategori</div><div class="v" id="udKategori">-</div></div>
-        <div class="info-box"><div class="k">Kontak WA</div><div class="v" id="udWaText">-</div></div>
-      </div>
+        <!-- SEARCH & FILTER TOOLBAR -->
+        <div class="toolbar reveal" style="margin-top:20px;">
+          <input type="text" id="umkmSearch" placeholder="Cari nama usaha atau produk..." oninput="filterUmkm()">
+          <select id="umkmKategori" onchange="filterUmkm()">
+            <option value="">Semua Kategori</option>
+            <option value="Kuliner">Kuliner &amp; Olahan</option>
+            <option value="Kerajinan">Kerajinan Tangan</option>
+            <option value="Sembako">Sembako &amp; Hasil Bumi</option>
+            <option value="Beras Nagari">Beras Nagari</option>
+          </select>
+          <select id="umkmSort" onchange="filterUmkm()">
+            <option value="az">Urutkan A – Z</option>
+            <option value="za">Urutkan Z – A</option>
+          </select>
+        </div>
 
-      <p style="color:var(--muted); line-height:1.8; font-size:14.5px; margin:20px 0;" id="udDesc"></p>
-
-      <h3 style="color:var(--green-dark); margin:26px 0 12px; font-size:17px;">Produk Utama</h3>
-      <div id="udProducts" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px;"></div>
-
-      <h3 style="color:var(--green-dark); margin:26px 0 12px; font-size:17px;">Peta & Lokasi Usaha</h3>
-      <div class="map-embed" style="height:230px;">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15955.680552856706!2d100.563779!3d-1.21577!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd35538fb68881d%3A0xec799774440129c0!2sKantor%20Wali%20Nagari%20Kubang%20Koto%20berapak!5e0!3m2!1sid!2sid!4v1775002302337!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-
-      <div style="margin-top:24px;">
-        <a class="btn btn-wa" id="udWaBtn" href="#" target="_blank">Hubungi Pemilik via WhatsApp</a>
+        <!-- UMKM GRID -->
+        <div class="grid grid-3 reveal" id="umkmGrid" style="margin-top:24px;">
+          <!-- Rendered by JS -->
+        </div>
       </div>
     </div>
-  </div>
+  @endif
+
+  <style>
+    @media (max-width: 900px) {
+      .umkm-showcase-grid {
+        grid-template-columns: 1fr !important;
+      }
+      #sliderContainer {
+        min-height: 300px !important;
+      }
+    }
+  </style>
 
   <!-- SECTION HUBUNGI KAMI -->
   <x-contact-section />
@@ -112,25 +172,71 @@
   <!-- FOOTER -->
   @include('layouts.footer')
 
-  <!-- JS SEARCH, FILTER & DETAIL LOGIC -->
+  <!-- JS AUTOMATIC SLIDER & CATALOG LOGIC -->
   <script>
-    // Build UMKM list from database data passed via Blade
-    const umkmList = @json($umkms->map(function($u) {
-        return [
-            'id' => 'u'.$u->id,
-            'nama' => $u->nama_usaha,
-            'kategori' => $u->kategori,
-            'pemilik' => $u->pemilik,
-            'hp' => $u->nomor_wa,
-            'alamat' => $u->alamat,
-            'img' => $u->foto ? '/storage/'.$u->foto : 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600&auto=format&fit=crop',
-            'desc' => $u->deskripsi,
-            'products' => $u->produk_utama ?? [],
-        ];
-    })->values());
+    const umkmList = @json($umkms);
+    const featuredSlidesCount = {{ !empty($slides) ? count($slides) : 1 }};
+    let currentSlide = 0;
+    let autoSlideInterval = null;
+
+    function updateSlideUI() {
+      const slides = document.querySelectorAll('.umkm-slide-item');
+      const thumbs = document.querySelectorAll('#thumbStrip .thumb-item');
+      const counter = document.getElementById('slideCounter');
+
+      if (slides.length === 0) return;
+
+      slides.forEach((s, i) => {
+        if (i === currentSlide) {
+          s.style.opacity = '1';
+          s.classList.add('active');
+        } else {
+          s.style.opacity = '0';
+          s.classList.remove('active');
+        }
+      });
+
+      if (counter) {
+        counter.innerText = `${currentSlide + 1} / ${slides.length}`;
+      }
+    }
+
+    function nextSlide() {
+      if (featuredSlidesCount <= 1) return;
+      currentSlide = (currentSlide + 1) % featuredSlidesCount;
+      updateSlideUI();
+    }
+
+    function prevSlide() {
+      if (featuredSlidesCount <= 1) return;
+      currentSlide = (currentSlide - 1 + featuredSlidesCount) % featuredSlidesCount;
+      updateSlideUI();
+    }
+
+    function goToSlide(idx) {
+      currentSlide = idx;
+      updateSlideUI();
+    }
+
+    function startAutoSlide() {
+      if (featuredSlidesCount > 1 && !autoSlideInterval) {
+        // Slider berganti otomatis setiap 2.5 detik (2500 ms) agar nyaman dilihat
+        autoSlideInterval = setInterval(nextSlide, 2500);
+      }
+    }
+
+    function stopAutoSlide() {
+      if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+      }
+    }
 
     function filterUmkm() {
-      const q = document.getElementById('umkmSearch').value.toLowerCase();
+      const qInput = document.getElementById('umkmSearch');
+      if (!qInput) return;
+
+      const q = qInput.value.toLowerCase();
       const kat = document.getElementById('umkmKategori').value;
       const sort = document.getElementById('umkmSort').value;
 
@@ -148,13 +254,15 @@
 
     function renderUmkmGrid(items) {
       const grid = document.getElementById('umkmGrid');
+      if (!grid) return;
+
       if (items.length === 0) {
         grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:var(--muted); padding:30px;">Tidak ada UMKM yang sesuai pencarian.</p>';
         return;
       }
 
       grid.innerHTML = items.map(item => `
-        <div class="card clickable card-hover" onclick="showUmkmDetail('${item.id}')">
+        <div class="card clickable card-hover">
           <div class="card-img" style="background-image:url('${item.img}')"></div>
           <div class="card-body">
             <span class="pill">${item.kategori}</span>
@@ -169,30 +277,9 @@
       `).join('');
     }
 
-    function showUmkmDetail(id) {
-      const item = umkmList.find(x => x.id === id);
-      if(!item) return;
-
-      document.getElementById('udTitle').innerText = item.nama;
-      document.getElementById('udPemilik').innerText = item.pemilik;
-      document.getElementById('udKategori').innerText = item.kategori;
-      document.getElementById('udWaText').innerText = '+' + item.hp;
-      document.getElementById('udDesc').innerText = item.desc;
-      document.getElementById('udWaBtn').href = `https://wa.me/${item.hp}?text=Halo%20${encodeURIComponent(item.pemilik)},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(item.nama)}`;
-
-      const pDiv = document.getElementById('udProducts');
-      const products = Array.isArray(item.products) ? item.products : [];
-      pDiv.innerHTML = products.map(p => `<span class="pill pill-gold">${p}</span>`).join('');
-
-      const sec = document.getElementById('umkmDetailSection');
-      sec.style.display = 'block';
-      sec.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function closeUmkmDetail() {
-      document.getElementById('umkmDetailSection').style.display = 'none';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => filterUmkm());
+    document.addEventListener('DOMContentLoaded', () => {
+      startAutoSlide();
+      filterUmkm();
+    });
   </script>
 @endsection

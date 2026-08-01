@@ -25,7 +25,8 @@ class BeritaController extends Controller
         $validated = $request->validate([
             'judul' => 'required|max:200',
             'kategori' => 'required|max:50',
-            'konten' => 'required',
+            'konten' => 'nullable',
+            'link_artikel' => 'nullable|url|max:500',
             'tanggal_terbit' => 'required|date',
             'status' => 'required|in:Terbit,Draft',
             'gambar' => 'nullable|image|max:2048',
@@ -52,7 +53,8 @@ class BeritaController extends Controller
         $validated = $request->validate([
             'judul' => 'required|max:200',
             'kategori' => 'required|max:50',
-            'konten' => 'required',
+            'konten' => 'nullable',
+            'link_artikel' => 'nullable|url|max:500',
             'tanggal_terbit' => 'required|date',
             'status' => 'required|in:Terbit,Draft',
             'gambar' => 'nullable|image|max:2048',

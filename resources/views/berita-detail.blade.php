@@ -18,9 +18,20 @@
           </div>
         @endif
 
-        <div style="font-size:15px; line-height:1.9; color:var(--ink);">
-          {!! nl2br(e($berita->konten)) !!}
-        </div>
+        @if($berita->konten)
+          <div style="font-size:15px; line-height:1.9; color:var(--ink); margin-bottom:24px;">
+            {!! nl2br(e($berita->konten)) !!}
+          </div>
+        @endif
+
+        @if($berita->link_artikel)
+          <div style="margin-top:28px; padding:20px; background:#f0f9ff; border:1.5px solid #0288d1; border-radius:16px;">
+            <p style="margin:0 0 10px; font-weight:700; color:#0369a1; font-size:14px;">Artikel ini juga dapat dibaca pada tautan portal berita luar:</p>
+            <a href="{{ $berita->link_artikel }}" target="_blank" class="btn" style="background:#0288d1; color:#fff; font-weight:700; padding:10px 20px; border-radius:24px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:13px;">
+              Kunjungi Artikel Asli ↗
+            </a>
+          </div>
+        @endif
       </article>
     </div>
   </div>

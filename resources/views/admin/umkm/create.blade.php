@@ -36,8 +36,8 @@
                         </select>
                     </div>
                     <div>
-                        <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Nomor WhatsApp</label>
-                        <input type="text" name="nomor_wa" value="{{ old('nomor_wa') }}" placeholder="628xxxx" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
+                        <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Nomor WhatsApp (opsional)</label>
+                        <input type="text" name="nomor_wa" value="{{ old('nomor_wa') }}" placeholder="628xxxx" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
                     </div>
                     <div>
                         <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Jam Operasional</label>
@@ -51,8 +51,14 @@
                 </div>
 
                 <div style="margin-bottom:16px;">
-                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Foto Produk / Usaha</label>
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Foto Sampul Utama</label>
                     <input type="file" name="foto" accept="image/*" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Foto Galeri &amp; Slider Produk (Bisa Pilih Banyak Foto Sekaligus 📸)</label>
+                    <input type="file" name="galeri_foto[]" multiple accept="image/*" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
+                    <small style="color:var(--muted); font-size:11.5px;">Tahan tombol Ctrl (atau Shift) saat memilih foto di komputer untuk memilih lebih dari 1 foto.</small>
                 </div>
 
                 <div style="margin-bottom:16px;">
@@ -65,9 +71,11 @@
                     <textarea name="deskripsi" rows="4" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit; font-size:14px; line-height:1.7;">{{ old('deskripsi') }}</textarea>
                 </div>
 
-                <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:12px 28px; font-size:15px; font-weight:700; border-radius:24px; width:100%; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25);">
-                    Simpan Data UMKM
-                </button>
+                <div style="text-align:right;">
+                    <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:10px 24px; font-size:14px; font-weight:700; border-radius:24px; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25); display:inline-flex; align-items:center; gap:6px;">
+                        ✓ Simpan Data UMKM
+                    </button>
+                </div>
             </div>
         </form>
     </div>

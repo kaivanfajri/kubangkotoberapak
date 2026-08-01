@@ -30,16 +30,11 @@
 
             <!-- 1. PEMERINTAH NAGARI -->
             <div class="card" style="padding:24px; margin-bottom:28px; border-radius:16px; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #eef2f0;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
-                    <div>
-                        <h3 style="font-size:1.1rem; color:var(--green-dark); font-weight:800; font-family:'Poppins',sans-serif; margin:0;">
-                            Pemerintah Nagari
-                        </h3>
-                        <small style="color:var(--muted);">Wali Nagari, Sekretaris Nagari, Kaur, Kasi, Staf &amp; Wali Kampung</small>
-                    </div>
-                    <button type="button" onclick="addAparaturRow('pemerintahList', 'pemerintah')" class="btn" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; font-weight:700; padding:9px 18px; font-size:13px; border-radius:24px; border:none; cursor:pointer; box-shadow:0 4px 12px rgba(46,125,50,0.25);">
-                        + Tambah Aparatur
-                    </button>
+                <div style="margin-bottom:16px;">
+                    <h3 style="font-size:1.1rem; color:var(--green-dark); font-weight:800; font-family:'Poppins',sans-serif; margin:0;">
+                        Pemerintah Nagari
+                    </h3>
+                    <small style="color:var(--muted);">Wali Nagari, Sekretaris Nagari, Kaur, Kasi, Staf &amp; Wali Kampung</small>
                 </div>
 
                 <div class="table-wrap" style="overflow-x:auto;">
@@ -80,20 +75,21 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div style="margin-top:14px;">
+                    <button type="button" onclick="addAparaturRow('pemerintahList', 'pemerintah')" class="btn" style="background:#e8f5e9; color:var(--green-dark); border:1.5px solid var(--green); font-weight:700; padding:8px 18px; font-size:13px; border-radius:20px; cursor:pointer;">
+                        + Tambah Baris Aparatur
+                    </button>
+                </div>
             </div>
 
             <!-- 2. BAMUS NAGARI -->
             <div class="card" style="padding:24px; margin-bottom:28px; border-radius:16px; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #eef2f0;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
-                    <div>
-                        <h3 style="font-size:1.1rem; color:#0288d1; font-weight:800; font-family:'Poppins',sans-serif; margin:0;">
-                            BAMUS Nagari
-                        </h3>
-                        <small style="color:var(--muted);">Badan Musyawarah Nagari</small>
-                    </div>
-                    <button type="button" onclick="addAparaturRow('bamusList', 'bamus')" class="btn" style="background:#0288d1; color:#fff; font-weight:700; padding:9px 18px; font-size:13px; border-radius:24px; border:none; cursor:pointer; box-shadow:0 4px 12px rgba(2,136,209,0.25);">
-                        + Tambah Bamus
-                    </button>
+                <div style="margin-bottom:16px;">
+                    <h3 style="font-size:1.1rem; color:#0288d1; font-weight:800; font-family:'Poppins',sans-serif; margin:0;">
+                        BAMUS Nagari
+                    </h3>
+                    <small style="color:var(--muted);">Badan Musyawarah Nagari</small>
                 </div>
 
                 <div class="table-wrap" style="overflow-x:auto;">
@@ -134,20 +130,21 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div style="margin-top:14px;">
+                    <button type="button" onclick="addAparaturRow('bamusList', 'bamus')" class="btn" style="background:#e0f2fe; color:#0369a1; border:1.5px solid #0288d1; font-weight:700; padding:8px 18px; font-size:13px; border-radius:20px; cursor:pointer;">
+                        + Tambah Baris Bamus
+                    </button>
+                </div>
             </div>
 
             <!-- 3. LPMN NAGARI -->
             <div class="card" style="padding:24px; margin-bottom:28px; border-radius:16px; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #eef2f0;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
-                    <div>
-                        <h3 style="font-size:1.1rem; color:#d97706; font-weight:800; font-family:'Poppins',sans-serif; margin:0;">
-                            LPMN Nagari
-                        </h3>
-                        <small style="color:var(--muted);">Lembaga Pemberdayaan Masyarakat Nagari</small>
-                    </div>
-                    <button type="button" onclick="addAparaturRow('lpmnList', 'lpmn')" class="btn" style="background:#d97706; color:#fff; font-weight:700; padding:9px 18px; font-size:13px; border-radius:24px; border:none; cursor:pointer; box-shadow:0 4px 12px rgba(217,119,6,0.25);">
-                        + Tambah LPMN
-                    </button>
+                <div style="margin-bottom:16px;">
+                    <h3 style="font-size:1.1rem; color:#d97706; font-weight:800; font-family:'Poppins',sans-serif; margin:0;">
+                        LPMN Nagari
+                    </h3>
+                    <small style="color:var(--muted);">Lembaga Pemberdayaan Masyarakat Nagari</small>
                 </div>
 
                 <div class="table-wrap" style="overflow-x:auto;">
@@ -188,12 +185,18 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div style="margin-top:14px;">
+                    <button type="button" onclick="addAparaturRow('lpmnList', 'lpmn')" class="btn" style="background:#fef3c7; color:#b45309; border:1.5px solid #d97706; font-weight:700; padding:8px 18px; font-size:13px; border-radius:20px; cursor:pointer;">
+                        + Tambah Baris LPMN
+                    </button>
+                </div>
             </div>
 
             <!-- SUBMIT BUTTON -->
-            <div style="margin-top:24px; margin-bottom:40px;">
-                <button type="submit" class="btn btn-primary" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:14px 28px; font-size:16px; font-weight:800; border-radius:30px; width:100%; cursor:pointer; border:none; box-shadow:0 6px 20px rgba(46,125,50,0.3);">
-                    Simpan Perubahan Struktur Nagari
+            <div style="margin-top:24px; margin-bottom:40px; text-align:right;">
+                <button type="submit" class="btn btn-primary" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:11px 28px; font-size:14px; font-weight:800; border-radius:24px; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25); display:inline-flex; align-items:center; gap:6px;">
+                    ✓ Simpan Perubahan Struktur
                 </button>
             </div>
         </form>

@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class Berita extends Model
 {
     protected $fillable = [
-        'judul', 'slug', 'kategori', 'konten', 'gambar', 'tanggal_terbit', 'status',
+        'judul', 'slug', 'kategori', 'konten', 'link_artikel', 'gambar', 'tanggal_terbit', 'status',
     ];
 
     protected $casts = [

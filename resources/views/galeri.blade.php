@@ -50,13 +50,7 @@
   <!-- JS GALLERY & LIGHTBOX LOGIC -->
   <script>
     // Build gallery items from database data
-    const galleryItems = @json($galeris->map(function($g) {
-        return [
-            'src' => '/storage/'.$g->gambar,
-            'cat' => $g->kategori,
-            'cap' => $g->caption,
-        ];
-    })->values());
+    const galleryItems = @json($galeris);
 
     // Fallback: if no DB data yet, use static assets
     const fallbackItems = [

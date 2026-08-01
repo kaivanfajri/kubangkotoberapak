@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('header_title', 'Tambah Berita Baru')
-@section('header_subtitle', 'Tulis dan publikasikan berita atau kegiatan nagari.')
+@section('header_subtitle', 'Tulis berita nagari atau tautkan link artikel berita dari situs berita.')
 
 @section('content')
     <div style="max-width:800px; margin:0 auto;">
@@ -17,7 +17,7 @@
 
                 <div style="margin-bottom:16px;">
                     <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Judul Berita</label>
-                    <input type="text" name="judul" value="{{ old('judul') }}" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit; font-weight:600;">
+                    <input type="text" name="judul" value="{{ old('judul') }}" required placeholder="Tuliskan judul artikel berita..." style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit; font-weight:600;">
                 </div>
 
                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:16px;">
@@ -46,18 +46,26 @@
                 </div>
 
                 <div style="margin-bottom:16px;">
-                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Gambar Sampul</label>
-                    <input type="file" name="gambar" accept="image/*" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Link Artikel Berita Luar (opsional)</label>
+                    <input type="url" name="link_artikel" value="{{ old('link_artikel') }}" placeholder="https://contoh-situs-berita.com/artikel-123" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
+                    <small style="color:var(--muted); font-size:11.5px;">Isi jika berita berasal dari portal berita eksternal (Antara, Berita Daerah, dll).</small>
                 </div>
 
                 <div style="margin-bottom:16px;">
-                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Isi Konten Berita</label>
-                    <textarea name="konten" rows="12" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit; font-size:14px; line-height:1.7;">{{ old('konten') }}</textarea>
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Gambar Sampul (opsional)</label>
+                    <input type="file" name="gambar" accept="image/*" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
                 </div>
 
-                <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:12px 28px; font-size:15px; font-weight:700; border-radius:24px; width:100%; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25);">
-                    Simpan & Publikasikan Berita
-                </button>
+                <div style="margin-bottom:20px;">
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Isi Konten Berita (opsional jika menggunakan link artikel)</label>
+                    <textarea name="konten" rows="10" placeholder="Tuliskan berita lengkap di sini..." style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit; font-size:14px; line-height:1.7;">{{ old('konten') }}</textarea>
+                </div>
+
+                <div style="text-align:right;">
+                    <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:10px 24px; font-size:14px; font-weight:700; border-radius:24px; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25); display:inline-flex; align-items:center; gap:6px;">
+                        ✓ Simpan Berita
+                    </button>
+                </div>
             </div>
         </form>
     </div>

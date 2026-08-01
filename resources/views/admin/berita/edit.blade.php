@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('header_title', 'Edit Berita')
-@section('header_subtitle', 'Perbarui isi, kategori, atau status berita.')
+@section('header_subtitle', 'Perbarui isi, kategori, link artikel, atau status berita.')
 
 @section('content')
     <div style="max-width:800px; margin:0 auto;">
@@ -43,6 +43,12 @@
                 </div>
 
                 <div style="margin-bottom:16px;">
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Link Artikel Berita Luar (opsional)</label>
+                    <input type="url" name="link_artikel" value="{{ old('link_artikel', $berita->link_artikel) }}" placeholder="https://contoh-situs-berita.com/artikel-123" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
+                    <small style="color:var(--muted); font-size:11.5px;">Isi jika berita berasal dari portal berita eksternal (Antara, Berita Daerah, dll).</small>
+                </div>
+
+                <div style="margin-bottom:16px;">
                     <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Gambar Sampul (kosongkan jika tidak ingin ganti)</label>
                     @if($berita->gambar)
                         <div style="margin-bottom:8px;"><img src="{{ asset('storage/'.$berita->gambar) }}" style="max-height:120px; border-radius:10px;"></div>
@@ -50,14 +56,16 @@
                     <input type="file" name="gambar" accept="image/*" style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit;">
                 </div>
 
-                <div style="margin-bottom:16px;">
-                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Isi Konten Berita</label>
-                    <textarea name="konten" rows="12" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit; font-size:14px; line-height:1.7;">{{ old('konten', $berita->konten) }}</textarea>
+                <div style="margin-bottom:20px;">
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Isi Konten Berita (opsional jika menggunakan link artikel)</label>
+                    <textarea name="konten" rows="10" placeholder="Tuliskan berita lengkap di sini..." style="width:100%; border:1.5px solid #e0e6e0; border-radius:10px; padding:10px 14px; font-family:inherit; font-size:14px; line-height:1.7;">{{ old('konten', $berita->konten) }}</textarea>
                 </div>
 
-                <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:12px 28px; font-size:15px; font-weight:700; border-radius:24px; width:100%; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25);">
-                    Simpan Perubahan Berita
-                </button>
+                <div style="text-align:right;">
+                    <button type="submit" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:10px 24px; font-size:14px; font-weight:700; border-radius:24px; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25); display:inline-flex; align-items:center; gap:6px;">
+                        ✓ Simpan Perubahan
+                    </button>
+                </div>
             </div>
         </form>
     </div>

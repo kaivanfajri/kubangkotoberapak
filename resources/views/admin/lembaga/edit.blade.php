@@ -9,11 +9,8 @@
             <div>
                 <h3 style="font-size:1.15rem; font-weight:700; color:var(--ink); font-family:'Poppins',sans-serif;">Daftar Lembaga Nagari</h3>
             </div>
-            <div style="display:flex; gap:10px;">
-                <button type="button" onclick="addLembagaCard()" class="btn" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; font-weight:700; padding:9px 18px; border-radius:24px; border:none; cursor:pointer; font-size:13px; box-shadow:0 4px 12px rgba(46,125,50,0.25);">
-                    + Tambah Lembaga Baru
-                </button>
-                <a href="{{ route('lembaga') }}" target="_blank" class="btn" style="background:#e8f5e9; color:var(--green-dark); font-weight:700; border:1px solid var(--green); padding:9px 18px; border-radius:24px; text-decoration:none; font-size:13px; display:inline-flex; align-items:center; gap:6px;">
+            <div>
+                <a href="{{ route('lembaga') }}" target="_blank" class="btn" style="background:#e8f5e9; color:var(--green-dark); font-weight:700; border:1px solid var(--green); padding:8px 16px; border-radius:24px; text-decoration:none; font-size:13px; display:inline-flex; align-items:center; gap:6px;">
                     Lihat Tampilan Publik ↗
                 </a>
             </div>
@@ -71,8 +68,8 @@
                                 <input type="text" name="items[{{ $index }}][anggota]" value="{{ $item['anggota'] ?? '' }}" placeholder="Contoh: 45 Murid / 12 Pengurus" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:9px 12px; font-family:inherit;">
                             </div>
                             <div class="field">
-                                <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">No. WA Kontak (tanpa +)</label>
-                                <input type="text" name="items[{{ $index }}][hp]" value="{{ $item['hp'] ?? '6281234567890' }}" placeholder="628xxxx" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:9px 12px; font-family:inherit;">
+                                <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">No. WA Kontak (opsional)</label>
+                                <input type="text" name="items[{{ $index }}][hp]" value="{{ $item['hp'] ?? '' }}" placeholder="628xxxx (opsional)" style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:9px 12px; font-family:inherit;">
                             </div>
                         </div>
 
@@ -84,9 +81,14 @@
                 @endforeach
             </div>
 
-            <div style="margin-top:24px; margin-bottom:40px;">
-                <button type="submit" class="btn btn-primary" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:14px 28px; font-size:16px; font-weight:800; border-radius:30px; width:100%; cursor:pointer; border:none; box-shadow:0 6px 20px rgba(46,125,50,0.3);">
-                    Simpan Perubahan Lembaga Nagari
+            <!-- BOTTOM ACTION BAR: TAMBAH & SIMPAN -->
+            <div style="margin-top:20px; margin-bottom:40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+                <button type="button" onclick="addLembagaCard()" class="btn" style="background:#e8f5e9; color:var(--green-dark); font-weight:700; border:1.5px solid var(--green); padding:10px 20px; border-radius:24px; font-size:13.5px; cursor:pointer;">
+                    + Tambah Lembaga Baru
+                </button>
+
+                <button type="submit" class="btn btn-primary" style="background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:11px 26px; font-size:14px; font-weight:800; border-radius:24px; cursor:pointer; border:none; box-shadow:0 4px 12px rgba(46,125,50,0.25); display:inline-flex; align-items:center; gap:6px;">
+                    ✓ Simpan Perubahan Lembaga
                 </button>
             </div>
         </form>
@@ -140,8 +142,8 @@
                         <input type="text" name="items[${index}][anggota]" value="" placeholder="Contoh: 60 Santri" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:9px 12px; font-family:inherit;">
                     </div>
                     <div class="field">
-                        <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">No. WA Kontak (tanpa +)</label>
-                        <input type="text" name="items[${index}][hp]" value="6281234567890" placeholder="628xxxx" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:9px 12px; font-family:inherit;">
+                        <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">No. WA Kontak (opsional)</label>
+                        <input type="text" name="items[${index}][hp]" value="" placeholder="628xxxx (opsional)" style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:9px 12px; font-family:inherit;">
                     </div>
                 </div>
 

@@ -26,20 +26,42 @@ class UmkmController extends Controller
             'pemilik' => 'required|max:100',
             'kategori' => 'required|max:50',
             'alamat' => 'required|max:200',
-            'nomor_wa' => 'required|max:20',
+            'nomor_wa' => 'nullable|max:20',
             'jam_operasional' => 'nullable|max:100',
             'deskripsi' => 'required',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => 'nullable|image|max:3072',
+            'galeri_foto.*' => 'nullable|image|max:3072',
             'produk_utama' => 'nullable|string',
         ]);
 
+        $photos = [];
+
+        // Handle cover photo
         if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('umkm', 'public');
+            $coverPath = $request->file('foto')->store('umkm', 'public');
+            $validated['foto'] = $coverPath;
+            $photos[] = $coverPath;
         }
 
-        // Convert comma-separated products to JSON array
+        // Handle multiple gallery photos
+        if ($request->hasFile('galeri_foto')) {
+            foreach ($request->file('galeri_foto') as $file) {
+                if ($file->isValid()) {
+                    $photos[] = $file->store('umkm', 'public');
+                }
+            }
+        }
+
+        if (empty($validated['foto']) && count($photos) > 0) {
+            $validated['foto'] = $photos[0];
+        }
+
+        $validated['galeri_foto'] = array_values(array_unique($photos));
+
         if (!empty($validated['produk_utama'])) {
-            $validated['produk_utama'] = json_encode(array_map('trim', explode(',', $validated['produk_utama'])));
+            $validated['produk_utama'] = array_map('trim', explode(',', $validated['produk_utama']));
+        } else {
+            $validated['produk_utama'] = [];
         }
 
         Umkm::create($validated);
@@ -59,19 +81,45 @@ class UmkmController extends Controller
             'pemilik' => 'required|max:100',
             'kategori' => 'required|max:50',
             'alamat' => 'required|max:200',
-            'nomor_wa' => 'required|max:20',
+            'nomor_wa' => 'nullable|max:20',
             'jam_operasional' => 'nullable|max:100',
             'deskripsi' => 'required',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => 'nullable|image|max:3072',
+            'galeri_foto.*' => 'nullable|image|max:3072',
             'produk_utama' => 'nullable|string',
         ]);
 
-        if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('umkm', 'public');
+        $existingPhotos = is_array($umkm->galeri_foto) ? $umkm->galeri_foto : [];
+        if ($umkm->foto && !in_array($umkm->foto, $existingPhotos)) {
+            $existingPhotos[] = $umkm->foto;
         }
 
+        if ($request->hasFile('foto')) {
+            $coverPath = $request->file('foto')->store('umkm', 'public');
+            $validated['foto'] = $coverPath;
+            if (!in_array($coverPath, $existingPhotos)) {
+                array_unshift($existingPhotos, $coverPath);
+            }
+        }
+
+        if ($request->hasFile('galeri_foto')) {
+            foreach ($request->file('galeri_foto') as $file) {
+                if ($file->isValid()) {
+                    $existingPhotos[] = $file->store('umkm', 'public');
+                }
+            }
+        }
+
+        if (empty($validated['foto']) && count($existingPhotos) > 0) {
+            $validated['foto'] = $existingPhotos[0];
+        }
+
+        $validated['galeri_foto'] = array_values(array_unique($existingPhotos));
+
         if (!empty($validated['produk_utama'])) {
-            $validated['produk_utama'] = json_encode(array_map('trim', explode(',', $validated['produk_utama'])));
+            $validated['produk_utama'] = array_map('trim', explode(',', $validated['produk_utama']));
+        } else {
+            $validated['produk_utama'] = [];
         }
 
         $umkm->update($validated);

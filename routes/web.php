@@ -65,26 +65,67 @@ Route::get('/struktur', function () {
 })->name('struktur');
 
 Route::get('/lembaga', function () {
-    $lembagaData = [];
-    if (Storage::exists('lembaga.json')) {
-        $lembagaData = json_decode(Storage::get('lembaga.json'), true) ?? [];
-    }
-    if (empty($lembagaData) && file_exists(storage_path('app/lembaga.json'))) {
-        $lembagaData = json_decode(file_get_contents(storage_path('app/lembaga.json')), true) ?? [];
-    }
-    if (empty($lembagaData) && file_exists(storage_path('app/private/lembaga.json'))) {
-        $lembagaData = json_decode(file_get_contents(storage_path('app/private/lembaga.json')), true) ?? [];
+    $dbItems = \App\Models\Lembaga::all();
+    if ($dbItems->count() > 0) {
+        $lembagaData = $dbItems->map(function($l) {
+            return [
+                'id' => 'l'.$l->id,
+                'kategori' => $l->kategori ?? 'Pemerintahan & Adat',
+                'nama' => $l->nama_lembaga,
+                'ketua' => $l->ketua,
+                'anggota' => $l->jumlah_anggota,
+                'hp' => $l->nomor_hp,
+                'desc' => $l->deskripsi,
+            ];
+        })->toArray();
+    } else {
+        $lembagaData = [];
+        if (Storage::exists('lembaga.json')) {
+            $lembagaData = json_decode(Storage::get('lembaga.json'), true) ?? [];
+        }
     }
     return view('lembaga', compact('lembagaData'));
 })->name('lembaga');
 
 Route::get('/umkm', function () {
-    $umkms = Umkm::all();
+    $umkms = Umkm::all()->map(function($u) {
+        $rawGallery = is_array($u->galeri_foto) ? $u->galeri_foto : [];
+        if ($u->foto && !in_array($u->foto, $rawGallery)) {
+            array_unshift($rawGallery, $u->foto);
+        }
+        $galleryImages = array_map(function($path) {
+            return str_starts_with($path, 'http') ? $path : asset('storage/' . $path);
+        }, array_values(array_filter($rawGallery)));
+
+        if (empty($galleryImages)) {
+            $galleryImages = [asset('Komoditi10.jpeg')];
+        }
+
+        return [
+            'id' => 'u'.$u->id,
+            'nama' => $u->nama_usaha,
+            'kategori' => $u->kategori,
+            'pemilik' => $u->pemilik,
+            'hp' => $u->nomor_wa,
+            'jam' => $u->jam_operasional ?? '08:00 - 17:00 WIB',
+            'alamat' => $u->alamat,
+            'img' => $galleryImages[0],
+            'gallery' => $galleryImages,
+            'desc' => $u->deskripsi,
+            'products' => is_array($u->produk_utama) ? $u->produk_utama : (empty($u->produk_utama) ? [] : json_decode($u->produk_utama, true) ?? []),
+        ];
+    })->values();
     return view('umkm', compact('umkms'));
 })->name('umkm');
 
 Route::get('/galeri', function () {
-    $galeris = Galeri::all();
+    $galeris = Galeri::all()->map(function($g) {
+        return [
+            'src' => '/storage/'.$g->gambar,
+            'cat' => $g->kategori,
+            'cap' => $g->caption,
+        ];
+    })->values();
     return view('galeri', compact('galeris'));
 })->name('galeri');
 

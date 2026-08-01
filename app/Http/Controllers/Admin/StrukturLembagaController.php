@@ -163,10 +163,25 @@ class StrukturLembagaController extends Controller
 
     public function editLembaga()
     {
-        $data = $this->readJsonData($this->getLembagaPath());
-
-        if (empty($data)) {
-            $data = $this->getDefaultLembaga();
+        $dbItems = \App\Models\Lembaga::all();
+        
+        if ($dbItems->count() > 0) {
+            $data = $dbItems->map(function($l) {
+                return [
+                    'id' => $l->id,
+                    'kategori' => $l->kategori ?? 'Pemerintahan & Adat',
+                    'nama' => $l->nama_lembaga,
+                    'ketua' => $l->ketua,
+                    'anggota' => $l->jumlah_anggota,
+                    'hp' => $l->nomor_hp,
+                    'desc' => $l->deskripsi,
+                ];
+            })->toArray();
+        } else {
+            $data = $this->readJsonData($this->getLembagaPath());
+            if (empty($data)) {
+                $data = $this->getDefaultLembaga();
+            }
         }
 
         return view('admin.lembaga.edit', compact('data'));
@@ -176,9 +191,25 @@ class StrukturLembagaController extends Controller
     {
         $items = array_values($request->input('items', []));
 
+        // Sync with database table lembagas
+        \App\Models\Lembaga::truncate();
+        foreach ($items as $item) {
+            if (!empty($item['nama'])) {
+                \App\Models\Lembaga::create([
+                    'nama_lembaga' => $item['nama'],
+                    'kategori' => $item['kategori'] ?? 'Pemerintahan & Adat',
+                    'ketua' => $item['ketua'] ?? '',
+                    'jumlah_anggota' => $item['anggota'] ?? '',
+                    'nomor_hp' => $item['hp'] ?? '',
+                    'deskripsi' => $item['desc'] ?? '',
+                ]);
+            }
+        }
+
+        // Sync with JSON file for fallback
         $this->writeJsonData($this->getLembagaPath(), $items);
 
-        return redirect()->back()->with('success', 'Daftar Lembaga Nagari berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Daftar Lembaga Nagari berhasil diperbarui di database.');
     }
 }
 

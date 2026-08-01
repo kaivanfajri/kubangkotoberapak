@@ -13,7 +13,8 @@ return new class extends Migration
             $table->string('judul', 200);
             $table->string('slug', 200)->unique();
             $table->string('kategori', 50);
-            $table->longText('konten');
+            $table->longText('konten')->nullable();
+            $table->string('link_artikel', 500)->nullable();
             $table->string('gambar', 255)->nullable();
             $table->date('tanggal_terbit');
             $table->enum('status', ['Terbit', 'Draft'])->default('Draft');
@@ -26,10 +27,11 @@ return new class extends Migration
             $table->string('pemilik', 100);
             $table->string('kategori', 50);
             $table->string('alamat', 200);
-            $table->string('nomor_wa', 20);
+            $table->string('nomor_wa', 20)->nullable();
             $table->string('jam_operasional', 100)->nullable();
             $table->text('deskripsi');
             $table->string('foto', 255)->nullable();
+            $table->text('galeri_foto')->nullable();
             $table->text('produk_utama')->nullable();
             $table->timestamps();
         });
@@ -68,9 +70,10 @@ return new class extends Migration
         Schema::create('lembagas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lembaga', 150);
+            $table->string('kategori', 100)->nullable();
             $table->string('ketua', 100);
             $table->string('jumlah_anggota', 50);
-            $table->string('nomor_hp', 20);
+            $table->string('nomor_hp', 20)->nullable();
             $table->text('deskripsi');
             $table->string('logo', 255)->nullable();
             $table->timestamps();
