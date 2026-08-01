@@ -21,7 +21,7 @@ class StrukturLembagaController extends Controller
     private function getDefaultPemerintah()
     {
         return [
-            ['jabatan' => 'Wali Nagari', 'nama' => 'NOVRIADI'],
+            ['jabatan' => 'Wali Nagari', 'nama' => 'Pj. NAZAMI EFENDI'],
             ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E'],
             ['jabatan' => 'Kaur Perencanaan', 'nama' => 'IRWANSYAH'],
             ['jabatan' => 'Kaur Keuangan', 'nama' => 'IBNU NURSIDIQ'],

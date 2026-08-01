@@ -18,7 +18,7 @@
 
   @php
     $pemerintah = $strukturData['pemerintah'] ?? [
-      ['jabatan' => 'Wali Nagari', 'nama' => 'NOVRIADI'],
+      ['jabatan' => 'Wali Nagari', 'nama' => 'Pj. NAZAMI EFENDI'],
       ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E'],
       ['jabatan' => 'Kaur Perencanaan', 'nama' => 'IRWANSYAH'],
       ['jabatan' => 'Kaur Keuangan', 'nama' => 'IBNU NURSIDIQ'],
@@ -45,29 +45,45 @@
       ['jabatan' => 'Bendahara', 'nama' => 'Marjan Delmi PNK. DT. Rky Basa']
     ];
 
-    $slogan = $strukturData['slogan'] ?? 'Basamo Mangko Manjadi';
+    $slogan = $strukturData['slogan'] ?? 'BASAMO MANGKO MANJADI';
 
-    // Separate government roles
-    $wali = current(array_filter($pemerintah, fn($p) => strtolower($p['jabatan']) == 'wali nagari')) ?: ['jabatan' => 'Wali Nagari', 'nama' => 'NOVRIADI'];
-    $sekretaris = current(array_filter($pemerintah, fn($p) => strtolower($p['jabatan']) == 'sekretaris nagari')) ?: ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E'];
-    
-    $perangkatStaff = array_filter($pemerintah, function($p) {
-      $j = strtolower($p['jabatan']);
-      return !in_array($j, ['wali nagari', 'sekretaris nagari']) && !str_contains($j, 'kampung');
+    // Separate government roles dynamically
+    $wali = current(array_filter($pemerintah, function($p) {
+      $j = strtolower($p['jabatan'] ?? '');
+      return str_contains($j, 'wali nagari') || (str_contains($j, 'wali') && !str_contains($j, 'kampung'));
+    })) ?: ($pemerintah[0] ?? ['jabatan' => 'Wali Nagari', 'nama' => 'Pj. NAZAMI EFENDI']);
+
+    $sekretaris = current(array_filter($pemerintah, function($p) {
+      $j = strtolower($p['jabatan'] ?? '');
+      return str_contains($j, 'sekretaris');
+    })) ?: ($pemerintah[1] ?? ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E']);
+
+    $perangkatStaff = array_filter($pemerintah, function($p) use ($wali, $sekretaris) {
+      $j = strtolower($p['jabatan'] ?? '');
+      $n = strtolower($p['nama'] ?? '');
+      $waliNama = strtolower($wali['nama'] ?? '');
+      $sekNama = strtolower($sekretaris['nama'] ?? '');
+
+      if ($n === $waliNama || $n === $sekNama) return false;
+      if (str_contains($j, 'wali nagari') || (str_contains($j, 'wali') && !str_contains($j, 'kampung'))) return false;
+      if (str_contains($j, 'sekretaris')) return false;
+      if (str_contains($j, 'kampung')) return false;
+
+      return true;
     });
 
     $waliKampung = array_filter($pemerintah, function($p) {
-      return str_contains(strtolower($p['jabatan']), 'kampung');
+      return str_contains(strtolower($p['jabatan'] ?? ''), 'kampung');
     });
 
     // Helper for initials avatar
     if (!function_exists('getInitials')) {
       function getInitials($name) {
-        $words = explode(' ', trim($name));
+        $words = array_values(array_filter(explode(' ', trim($name))));
         $initials = '';
         if (count($words) >= 2) {
           $initials = strtoupper(substr($words[0], 0, 1) . substr($words[1], 0, 1));
-        } else {
+        } else if (count($words) === 1) {
           $initials = strtoupper(substr($words[0], 0, 2));
         }
         return $initials ?: 'NN';
