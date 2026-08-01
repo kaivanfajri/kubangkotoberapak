@@ -17,34 +17,9 @@
   </div>
 
   @php
-    $pemerintah = $strukturData['pemerintah'] ?? [
-      ['jabatan' => 'Wali Nagari', 'nama' => 'Pj. NAZAMI EFENDI'],
-      ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E'],
-      ['jabatan' => 'Kaur Perencanaan', 'nama' => 'IRWANSYAH'],
-      ['jabatan' => 'Kaur Keuangan', 'nama' => 'IBNU NURSIDIQ'],
-      ['jabatan' => 'Kaur TU & Umum', 'nama' => 'DAYU NIRMALA DEWI S.E'],
-      ['jabatan' => 'Kasi Pemerintahan', 'nama' => 'LIRA MARLINA'],
-      ['jabatan' => 'Kasi Kesejahteraan dan Pelayanan', 'nama' => 'DITA MILENIA S.Si'],
-      ['jabatan' => 'Staf Nagari', 'nama' => 'ALVI MAHENDRA'],
-      ['jabatan' => 'Staf Bamus', 'nama' => 'WELLA SILVIKA S.Pd.I'],
-      ['jabatan' => 'Wali Kampung Kubang', 'nama' => 'EM ROMI'],
-      ['jabatan' => 'Wali Kampung Lembah Gumanti', 'nama' => 'WAN FEBRINDO S.Pd']
-    ];
-
-    $bamus = $strukturData['bamus'] ?? [
-      ['jabatan' => 'Ketua', 'nama' => 'WAHYU RESTU SAPUTRA Pnk. Dt Bagindo Rajo'],
-      ['jabatan' => 'Wakil Ketua', 'nama' => 'VENDRIANTO'],
-      ['jabatan' => 'Sekretaris', 'nama' => 'NELLA AMELIA'],
-      ['jabatan' => 'Anggota', 'nama' => 'SANJU YUSAFRINANDA'],
-      ['jabatan' => 'Anggota', 'nama' => 'ILHAM S.Pd.I']
-    ];
-
-    $lpmn = $strukturData['lpmn'] ?? [
-      ['jabatan' => 'Ketua', 'nama' => 'Yusmardi DT. Mandaro Kayo'],
-      ['jabatan' => 'Sekretaris', 'nama' => 'Marjuliadi'],
-      ['jabatan' => 'Bendahara', 'nama' => 'Marjan Delmi PNK. DT. Rky Basa']
-    ];
-
+    $pemerintah = $strukturData['pemerintah'] ?? [];
+    $bamus = $strukturData['bamus'] ?? [];
+    $lpmn = $strukturData['lpmn'] ?? [];
     $slogan = $strukturData['slogan'] ?? 'BASAMO MANGKO MANJADI';
 
     // Separate government roles dynamically

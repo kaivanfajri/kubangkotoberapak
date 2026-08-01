@@ -72,25 +72,95 @@ class NagariSeeder extends Seeder
                         ]);
                     }
                 }
-                return;
             }
-        }
-
-        $lembagas = [
-            ['nama_lembaga' => 'BAMUS (Badan Musyawarah Nagari)', 'kategori' => 'Pemerintahan & Adat', 'ketua' => 'WAHYU RESTU SAPUTRA Pnk. Dt Bagindo Rajo', 'jumlah_anggota' => '5 Orang', 'nomor_hp' => '6281234567890', 'deskripsi' => 'BAMUS merupakan lembaga perwujudan demokrasi dalam penyelenggaraan pemerintahan nagari yang menyalurkan aspirasi masyarakat dan menetapkan Peraturan Nagari bersama Wali Nagari.'],
-            ['nama_lembaga' => 'KAN (Kerapatan Adat Nagari)', 'kategori' => 'Pemerintahan & Adat', 'ketua' => 'Datuk Sitia', 'jumlah_anggota' => '12 Ninik Mamak', 'nomor_hp' => '6281234567891', 'deskripsi' => 'KAN adalah lembaga tinggi adat yang mengurus dan menyelesaikan sengketa adat, mengayomi hukum adat Minangkabau berlandaskan Adat Basandi Syarak, Syarak Basandi Kitabullah.'],
-            ['nama_lembaga' => 'LPMN (Lembaga Pemberdayaan Masyarakat Nagari)', 'kategori' => 'Pemerintahan & Adat', 'ketua' => 'Yusmardi DT. Mandaro Kayo', 'jumlah_anggota' => '3 Pengurus', 'nomor_hp' => '6281234567894', 'deskripsi' => 'LPMN membantu pemerintah nagari dalam merencanakan dan melaksanakan pembangunan secara bergotong royong.'],
-            ['nama_lembaga' => 'PAUD / TK Nagari Kubang', 'kategori' => 'Pendidikan & Keagamaan', 'ketua' => 'Ibu Nurbaiti S.Pd', 'jumlah_anggota' => '45 Murid', 'nomor_hp' => '6281234567896', 'deskripsi' => 'Lembaga pendidikan anak usia dini untuk membentuk karakter dasar, kreativitas, dan kesiapan belajar anak-anak nagari.'],
-            ['nama_lembaga' => 'SD Negeri Nagari Kubang', 'kategori' => 'Pendidikan & Keagamaan', 'ketua' => 'Kepala Sekolah SD', 'jumlah_anggota' => '120 Murid', 'nomor_hp' => '6281234567897', 'deskripsi' => 'Sekolah Dasar negeri penyelenggara pendidikan dasar 6 tahun bagi putra-putri Nagari Kubang Koto Berapak.'],
-            ['nama_lembaga' => 'TPA / TPQ Masjid Nagari', 'kategori' => 'Pendidikan & Keagamaan', 'ketua' => 'Ust. Ahmad', 'jumlah_anggota' => '60 Santri', 'nomor_hp' => '6281234567898', 'deskripsi' => 'Taman Pendidikan Al-Qur\'an wadah pembentukan akhlak karimah, baca tulis Al-Qur\'an, dan pendidikan agama Islam bagi anak-anak.'],
-            ['nama_lembaga' => 'Posyandu Balita & Lansia', 'kategori' => 'Kesehatan & Sosial', 'ketua' => 'Kader Kesehatan Nagari', 'jumlah_anggota' => '15 Kader', 'nomor_hp' => '6281234567899', 'deskripsi' => 'Pelayanan kesehatan kemasyarakatan berkala untuk pemantauan tumbuh kembang balita, imunisasi, dan pemeriksaan kesehatan lansia.'],
-            ['nama_lembaga' => 'TP-PKK Nagari', 'kategori' => 'Kesehatan & Sosial', 'ketua' => 'Ibu Ratna', 'jumlah_anggota' => '25 Anggota', 'nomor_hp' => '6281234567892', 'deskripsi' => 'Tim Penggerak PKK berperan aktif dalam membina kesejahteraan keluarga, posyandu balita & lansia, serta pemberdayaan ekonomi perempuan di nagari.'],
-            ['nama_lembaga' => 'Karang Taruna Tunas Muda', 'kategori' => 'Pemuda & Ekonomi', 'ketua' => 'Rizki Bayang', 'jumlah_anggota' => '35 Pemuda', 'nomor_hp' => '6281234567893', 'deskripsi' => 'Wadah pengembangan generasi muda nagari dalam bidang olahraga, seni budaya Randai, serta aksi kemanusiaan dan tanggap bencana.'],
-            ['nama_lembaga' => 'BUMNag Kubang Berkah', 'kategori' => 'Pemuda & Ekonomi', 'ketua' => 'Dedi Saputra', 'jumlah_anggota' => '7 Pengurus', 'nomor_hp' => '6281234567895', 'deskripsi' => 'Badan Usaha Milik Nagari yang mengelola unit usaha pemasaran hasil tani, simpan pinjam, dan sarana produksi pertanian.'],
+        } else {
+            $lembagas = [
+            ['nama_lembaga' => 'BAMUS (Badan Musyawarah Nagari)', 'kategori' => 'Pemerintahan & Adat', 'ketua' => 'WAHYU RESTU SAPUTRA Pnk. Dt Bagindo Rajo', 'jumlah_anggota' => '5 Orang', 'nomor_hp' => '', 'deskripsi' => 'BAMUS merupakan lembaga perwujudan demokrasi dalam penyelenggaraan pemerintahan nagari yang menyalurkan aspirasi masyarakat dan menetapkan Peraturan Nagari bersama Wali Nagari.'],
+            ['nama_lembaga' => 'KAN (Kerapatan Adat Nagari)', 'kategori' => 'Pemerintahan & Adat', 'ketua' => 'Datuk Sitia', 'jumlah_anggota' => '12 Ninik Mamak', 'nomor_hp' => '', 'deskripsi' => 'KAN adalah lembaga tinggi adat yang mengurus dan menyelesaikan sengketa adat, mengayomi hukum adat Minangkabau berlandaskan Adat Basandi Syarak, Syarak Basandi Kitabullah.'],
+            ['nama_lembaga' => 'LPMN (Lembaga Pemberdayaan Masyarakat Nagari)', 'kategori' => 'Pemerintahan & Adat', 'ketua' => 'Yusmardi DT. Mandaro Kayo', 'jumlah_anggota' => '3 Pengurus', 'nomor_hp' => '', 'deskripsi' => 'LPMN membantu pemerintah nagari dalam merencanakan dan melaksanakan pembangunan secara bergotong royong.'],
+            ['nama_lembaga' => 'PAUD / TK Nagari Kubang', 'kategori' => 'Pendidikan & Keagamaan', 'ketua' => 'Ibu Nurbaiti S.Pd', 'jumlah_anggota' => '45 Murid', 'nomor_hp' => '', 'deskripsi' => 'Lembaga pendidikan anak usia dini untuk membentuk karakter dasar, kreativitas, dan kesiapan belajar anak-anak nagari.'],
+            ['nama_lembaga' => 'SD Negeri Nagari Kubang', 'kategori' => 'Pendidikan & Keagamaan', 'ketua' => 'Kepala Sekolah SD', 'jumlah_anggota' => '120 Murid', 'nomor_hp' => '', 'deskripsi' => 'Sekolah Dasar negeri penyelenggara pendidikan dasar 6 tahun bagi putra-putri Nagari Kubang Koto Berapak.'],
+            ['nama_lembaga' => 'TPA / TPQ Masjid Nagari', 'kategori' => 'Pendidikan & Keagamaan', 'ketua' => 'Ust. Ahmad', 'jumlah_anggota' => '60 Santri', 'nomor_hp' => '', 'deskripsi' => 'Taman Pendidikan Al-Qur\'an wadah pembentukan akhlak karimah, baca tulis Al-Qur\'an, dan pendidikan agama Islam bagi anak-anak.'],
+            ['nama_lembaga' => 'Posyandu Balita & Lansia', 'kategori' => 'Kesehatan & Sosial', 'ketua' => 'Kader Kesehatan Nagari', 'jumlah_anggota' => '15 Kader', 'nomor_hp' => '', 'deskripsi' => 'Pelayanan kesehatan kemasyarakatan berkala untuk pemantauan tumbuh kembang balita, imunisasi, dan pemeriksaan kesehatan lansia.'],
+            ['nama_lembaga' => 'TP-PKK Nagari', 'kategori' => 'Kesehatan & Sosial', 'ketua' => 'Ibu Ratna', 'jumlah_anggota' => '25 Anggota', 'nomor_hp' => '', 'deskripsi' => 'Tim Penggerak PKK berperan aktif dalam membina kesejahteraan keluarga, posyandu balita & lansia, serta pemberdayaan ekonomi perempuan di nagari.'],
+            ['nama_lembaga' => 'Karang Taruna Tunas Muda', 'kategori' => 'Pemuda & Ekonomi', 'ketua' => 'Rizki Bayang', 'jumlah_anggota' => '35 Pemuda', 'nomor_hp' => '', 'deskripsi' => 'Wadah pengembangan generasi muda nagari dalam bidang olahraga, seni budaya Randai, serta aksi kemanusiaan dan tanggap bencana.'],
+            ['nama_lembaga' => 'BUMNag Kubang Berkah', 'kategori' => 'Pemuda & Ekonomi', 'ketua' => 'Dedi Saputra', 'jumlah_anggota' => '7 Pengurus', 'nomor_hp' => '', 'deskripsi' => 'Badan Usaha Milik Nagari yang mengelola unit usaha pemasaran hasil tani, simpan pinjam, dan sarana produksi pertanian.'],
         ];
 
         foreach ($lembagas as $l) {
             Lembaga::firstOrCreate(['nama_lembaga' => $l['nama_lembaga']], $l);
+        }
+        }
+
+        // =============================================
+        // 4. DATA STRUKTUR NAGARI (Ke Database Table 'strukturs')
+        // =============================================
+        \App\Models\Setting::updateOrCreate(['key' => 'slogan'], ['value' => 'BASAMO MANGKO MANJADI']);
+        
+        $strukturJsonPath = storage_path('app/struktur.json');
+        if (file_exists($strukturJsonPath)) {
+            $sData = json_decode(file_get_contents($strukturJsonPath), true);
+            if (!empty($sData)) {
+                if (!empty($sData['slogan'])) {
+                    \App\Models\Setting::updateOrCreate(['key' => 'slogan'], ['value' => $sData['slogan']]);
+                }
+                \App\Models\Struktur::truncate();
+                $categories = ['pemerintah', 'bamus', 'lpmn'];
+                foreach ($categories as $cat) {
+                    if (!empty($sData[$cat]) && is_array($sData[$cat])) {
+                        foreach ($sData[$cat] as $idx => $item) {
+                            \App\Models\Struktur::create([
+                                'nama' => $item['nama'] ?? '',
+                                'jabatan' => $item['jabatan'] ?? '',
+                                'kategori' => $cat,
+                                'foto' => $item['foto'] ?? null,
+                                'urutan' => $idx + 1,
+                            ]);
+                        }
+                    }
+                }
+                return;
+            }
+        }
+
+        \App\Models\Struktur::truncate();
+        $defaultStruktur = [
+            'pemerintah' => [
+                ['jabatan' => 'Wali Nagari', 'nama' => 'Pj. NAZAMI EFENDI'],
+                ['jabatan' => 'Sekretaris Nagari', 'nama' => 'FITRA S.E'],
+                ['jabatan' => 'Kaur Perencanaan', 'nama' => 'IRWANSYAH'],
+                ['jabatan' => 'Kaur Keuangan', 'nama' => 'IBNU NURSIDIQ'],
+                ['jabatan' => 'Kaur TU & Umum', 'nama' => 'DAYU NIRMALA DEWI S.E'],
+                ['jabatan' => 'Kasi Pemerintahan', 'nama' => 'LIRA MARLINA'],
+                ['jabatan' => 'Kasi Kesejahteraan dan Pelayanan', 'nama' => 'DITA MILENIA S.Si'],
+                ['jabatan' => 'Staf Nagari', 'nama' => 'ALVI MAHENDRA'],
+                ['jabatan' => 'Staf Bamus', 'nama' => 'WELLA SILVIKA S.Pd.I'],
+                ['jabatan' => 'Wali Kampung Kubang', 'nama' => 'EM ROMI'],
+                ['jabatan' => 'Wali Kampung Lembah Gumanti', 'nama' => 'WAN FEBRINDO S.Pd']
+            ],
+            'bamus' => [
+                ['jabatan' => 'Ketua', 'nama' => 'WAHYU RESTU SAPUTRA PNK. DT BAGINDO RAJO'],
+                ['jabatan' => 'Wakil Ketua', 'nama' => 'VENDRIANTO'],
+                ['jabatan' => 'Sekretaris', 'nama' => 'NELLA AMELIA'],
+                ['jabatan' => 'Anggota', 'nama' => 'SANJU YUSAFRINANDA'],
+                ['jabatan' => 'Anggota', 'nama' => 'ILHAM S.Pd.I']
+            ],
+            'lpmn' => [
+                ['jabatan' => 'Ketua', 'nama' => 'YUSMARDI DT. MANDARO KAYO'],
+                ['jabatan' => 'Sekretaris', 'nama' => 'MARJUALIADI'],
+                ['jabatan' => 'Bendahara', 'nama' => 'MARJAN DELMI PNK. DT. RANGKAYO BASA']
+            ]
+        ];
+
+        foreach ($defaultStruktur as $cat => $items) {
+            foreach ($items as $idx => $item) {
+                \App\Models\Struktur::create([
+                    'nama' => $item['nama'],
+                    'jabatan' => $item['jabatan'],
+                    'kategori' => $cat,
+                    'urutan' => $idx + 1,
+                ]);
+            }
         }
     }
 }

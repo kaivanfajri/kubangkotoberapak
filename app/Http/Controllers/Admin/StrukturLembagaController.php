@@ -114,19 +114,24 @@ class StrukturLembagaController extends Controller
 
     public function editStruktur()
     {
-        $data = $this->readJsonData($this->getStrukturPath());
+        $dbPemerintah = \App\Models\Struktur::where('kategori', 'pemerintah')->orderBy('urutan')->get()->toArray();
+        $dbBamus = \App\Models\Struktur::where('kategori', 'bamus')->orderBy('urutan')->get()->toArray();
+        $dbLpmn = \App\Models\Struktur::where('kategori', 'lpmn')->orderBy('urutan')->get()->toArray();
+        $slogan = \App\Models\Setting::where('key', 'slogan')->value('value') ?? 'BASAMO MANGKO MANJADI';
 
-        if (empty($data['pemerintah'])) {
-            $data['pemerintah'] = $this->getDefaultPemerintah();
-        }
-        if (empty($data['bamus'])) {
-            $data['bamus'] = $this->getDefaultBamus();
-        }
-        if (empty($data['lpmn'])) {
-            $data['lpmn'] = $this->getDefaultLpmn();
-        }
-        if (empty($data['slogan'])) {
-            $data['slogan'] = 'Basamo Mangko Manjadi';
+        if (empty($dbPemerintah) && empty($dbBamus) && empty($dbLpmn)) {
+            $data = $this->readJsonData($this->getStrukturPath());
+            if (empty($data['pemerintah'])) $data['pemerintah'] = $this->getDefaultPemerintah();
+            if (empty($data['bamus'])) $data['bamus'] = $this->getDefaultBamus();
+            if (empty($data['lpmn'])) $data['lpmn'] = $this->getDefaultLpmn();
+            if (empty($data['slogan'])) $data['slogan'] = $slogan;
+        } else {
+            $data = [
+                'pemerintah' => $dbPemerintah,
+                'bamus' => $dbBamus,
+                'lpmn' => $dbLpmn,
+                'slogan' => $slogan,
+            ];
         }
 
         return view('admin.struktur.edit', compact('data'));
@@ -134,17 +139,28 @@ class StrukturLembagaController extends Controller
 
     public function updateStruktur(Request $request)
     {
+        $slogan = $request->input('slogan', 'BASAMO MANGKO MANJADI');
+        \App\Models\Setting::updateOrCreate(['key' => 'slogan'], ['value' => $slogan]);
+
         $categories = ['pemerintah', 'bamus', 'lpmn'];
-        $payload = [
-            'slogan' => $request->input('slogan', 'Basamo Mangko Manjadi'),
-        ];
+        $payload = ['slogan' => $slogan];
+
+        \App\Models\Struktur::truncate();
 
         foreach ($categories as $cat) {
-            $items = $request->input($cat, []);
+            $items = array_values($request->input($cat, []));
             $processed = [];
 
-            foreach ($items as $item) {
+            foreach ($items as $idx => $item) {
                 if (!empty($item['nama']) || !empty($item['jabatan'])) {
+                    \App\Models\Struktur::create([
+                        'nama' => $item['nama'] ?? '',
+                        'jabatan' => $item['jabatan'] ?? '',
+                        'kategori' => $cat,
+                        'foto' => null,
+                        'urutan' => $idx + 1,
+                    ]);
+
                     $processed[] = [
                         'jabatan' => $item['jabatan'] ?? '',
                         'nama' => $item['nama'] ?? '',
@@ -158,7 +174,7 @@ class StrukturLembagaController extends Controller
 
         $this->writeJsonData($this->getStrukturPath(), $payload);
 
-        return redirect()->back()->with('success', 'Struktur Nagari berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Struktur Nagari berhasil diperbarui di database.');
     }
 
     public function editLembaga()

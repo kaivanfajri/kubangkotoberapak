@@ -51,15 +51,23 @@ Route::get('/Peternakan', function () {
 })->name('Peternakan');
 
 Route::get('/struktur', function () {
-    $strukturData = [];
-    if (Storage::exists('struktur.json')) {
-        $strukturData = json_decode(Storage::get('struktur.json'), true) ?? [];
-    }
-    if (empty($strukturData) && file_exists(storage_path('app/struktur.json'))) {
-        $strukturData = json_decode(file_get_contents(storage_path('app/struktur.json')), true) ?? [];
-    }
-    if (empty($strukturData) && file_exists(storage_path('app/private/struktur.json'))) {
-        $strukturData = json_decode(file_get_contents(storage_path('app/private/struktur.json')), true) ?? [];
+    $dbPemerintah = \App\Models\Struktur::where('kategori', 'pemerintah')->orderBy('urutan')->get()->toArray();
+    $dbBamus = \App\Models\Struktur::where('kategori', 'bamus')->orderBy('urutan')->get()->toArray();
+    $dbLpmn = \App\Models\Struktur::where('kategori', 'lpmn')->orderBy('urutan')->get()->toArray();
+    $slogan = \App\Models\Setting::where('key', 'slogan')->value('value') ?? 'BASAMO MANGKO MANJADI';
+
+    if (!empty($dbPemerintah) || !empty($dbBamus) || !empty($dbLpmn)) {
+        $strukturData = [
+            'pemerintah' => $dbPemerintah,
+            'bamus' => $dbBamus,
+            'lpmn' => $dbLpmn,
+            'slogan' => $slogan,
+        ];
+    } else {
+        $strukturData = [];
+        if (file_exists(storage_path('app/struktur.json'))) {
+            $strukturData = json_decode(file_get_contents(storage_path('app/struktur.json')), true) ?? [];
+        }
     }
     return view('struktur', compact('strukturData'));
 })->name('struktur');
