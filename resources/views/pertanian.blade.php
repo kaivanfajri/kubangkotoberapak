@@ -142,13 +142,13 @@
     const kelompokTaniDB = @json($kelompokTanis);
 
     const kelompokTaniFallback = [
-      { id: 'durian-taba', nama: 'Kelompok Tani Durian Taba', ketua: 'H. Zulkifli', hp: '6281234567890', alamat: 'Jorong Durian Taba', anggota: 22, luas: '20 Ha', komoditas: 'Padi Sokan', produktivitas: '6.1 Ton/Ha', status: 'Aktif', members: [['Zulkifli', 'Padi', '1.2 Ha', 'Aktif'], ['Rahman', 'Padi', '0.9 Ha', 'Aktif'], ['Yusra', 'Padi', '1.5 Ha', 'Aktif'], ['Budi', 'Padi & Semangka', '1.0 Ha', 'Aktif']] },
-      { id: 'sungai-tapuh', nama: 'Kelompok Tani Sungai Tapuh', ketua: 'Ridwan', hp: '6281234567891', alamat: 'Jorong Sungai Tapuh', anggota: 19, luas: '23 Ha', komoditas: 'Padi Cisokan', produktivitas: '7.2 Ton/Ha', status: 'Aktif', members: [['Ridwan', 'Padi', '1.4 Ha', 'Aktif'], ['Fitri', 'Padi', '1.1 Ha', 'Aktif'], ['Anton', 'Padi', '1.0 Ha', 'Aktif']] },
-      { id: 'pintu-rayo-1', nama: 'Kelompok Tani Pintu Rayo I', ketua: 'Basri', hp: '6281234567892', alamat: 'Jorong Pintu Rayo', anggota: 20, luas: '20 Ha', komoditas: 'Padi & Semangka', produktivitas: '6.7 Ton/Ha', status: 'Aktif', members: [['Basri', 'Padi', '1.3 Ha', 'Aktif'], ['Hasan', 'Semangka', '0.8 Ha', 'Aktif'], ['Syamsul', 'Padi', '1.2 Ha', 'Aktif']] },
-      { id: 'pintu-rayo-2', nama: 'Kelompok Tani Pintu Rayo II', ketua: 'Nurdin', hp: '6281234567893', alamat: 'Jorong Pintu Rayo', anggota: 18, luas: '18 Ha', komoditas: 'Padi Sawah', produktivitas: '6.3 Ton/Ha', status: 'Aktif', members: [['Nurdin', 'Padi', '1.1 Ha', 'Aktif'], ['Mardi', 'Padi', '0.9 Ha', 'Aktif'], ['Zainal', 'Padi', '1.4 Ha', 'Aktif']] },
-      { id: 'sawah-balik', nama: 'Kelompok Tani Sawah Balik', ketua: 'Syafril', hp: '6281234567894', alamat: 'Jorong Sawah Balik', anggota: 25, luas: '27 Ha', komoditas: 'Padi & Jagung', produktivitas: '7.0 Ton/Ha', status: 'Aktif', members: [['Syafril', 'Padi', '1.6 Ha', 'Aktif'], ['Arman', 'Jagung', '1.2 Ha', 'Aktif'], ['Kadir', 'Padi', '1.0 Ha', 'Aktif']] },
-      { id: 'anak-aia', nama: 'Kelompok Tani Anak Aia', ketua: 'Bachtiar', hp: '6281234567895', alamat: 'Jorong Anak Aia', anggota: 21, luas: '22 Ha', komoditas: 'Padi & Hortikultura', produktivitas: '6.5 Ton/Ha', status: 'Aktif', members: [['Bachtiar', 'Padi', '1.5 Ha', 'Aktif'], ['Eri', 'Hortikultura', '0.7 Ha', 'Aktif'], ['Joni', 'Padi', '1.1 Ha', 'Aktif']] },
-      { id: 'ikua-koto', nama: 'Kelompok Tani Ikua Koto', ketua: 'Darmansyah', hp: '6281234567896', alamat: 'Jorong Ikua Koto', anggota: 24, luas: '25 Ha', komoditas: 'Padi Sawah', produktivitas: '6.8 Ton/Ha', status: 'Aktif', members: [['Darmansyah', 'Padi', '1.7 Ha', 'Aktif'], ['Taufik', 'Padi', '1.2 Ha', 'Aktif'], ['Wandra', 'Padi', '1.1 Ha', 'Aktif']] }
+      { id: 'durian-taba', nama: 'Kelompok Tani Durian Taba', ketua: 'H. Zulkifli', hp: '', alamat: 'Jorong Durian Taba', anggota: 22, luas: '20 Ha', komoditas: 'Padi Sokan', produktivitas: '6.1 Ton/Ha', status: 'Aktif', members: [['Zulkifli', 'Padi', '1.2 Ha', 'Aktif'], ['Rahman', 'Padi', '0.9 Ha', 'Aktif'], ['Yusra', 'Padi', '1.5 Ha', 'Aktif'], ['Budi', 'Padi & Semangka', '1.0 Ha', 'Aktif']] },
+      { id: 'sungai-tapuh', nama: 'Kelompok Tani Sungai Tapuh', ketua: 'Ridwan', hp: '', alamat: 'Jorong Sungai Tapuh', anggota: 19, luas: '23 Ha', komoditas: 'Padi Cisokan', produktivitas: '7.2 Ton/Ha', status: 'Aktif', members: [['Ridwan', 'Padi', '1.4 Ha', 'Aktif'], ['Fitri', 'Padi', '1.1 Ha', 'Aktif'], ['Anton', 'Padi', '1.0 Ha', 'Aktif']] },
+      { id: 'pintu-rayo-1', nama: 'Kelompok Tani Pintu Rayo I', ketua: 'Basri', hp: '', alamat: 'Jorong Pintu Rayo', anggota: 20, luas: '20 Ha', komoditas: 'Padi & Semangka', produktivitas: '6.7 Ton/Ha', status: 'Aktif', members: [['Basri', 'Padi', '1.3 Ha', 'Aktif'], ['Hasan', 'Semangka', '0.8 Ha', 'Aktif'], ['Syamsul', 'Padi', '1.2 Ha', 'Aktif']] },
+      { id: 'pintu-rayo-2', nama: 'Kelompok Tani Pintu Rayo II', ketua: 'Nurdin', hp: '', alamat: 'Jorong Pintu Rayo', anggota: 18, luas: '18 Ha', komoditas: 'Padi Sawah', produktivitas: '6.3 Ton/Ha', status: 'Aktif', members: [['Nurdin', 'Padi', '1.1 Ha', 'Aktif'], ['Mardi', 'Padi', '0.9 Ha', 'Aktif'], ['Zainal', 'Padi', '1.4 Ha', 'Aktif']] },
+      { id: 'sawah-balik', nama: 'Kelompok Tani Sawah Balik', ketua: 'Syafril', hp: '', alamat: 'Jorong Sawah Balik', anggota: 25, luas: '27 Ha', komoditas: 'Padi & Jagung', produktivitas: '7.0 Ton/Ha', status: 'Aktif', members: [['Syafril', 'Padi', '1.6 Ha', 'Aktif'], ['Arman', 'Jagung', '1.2 Ha', 'Aktif'], ['Kadir', 'Padi', '1.0 Ha', 'Aktif']] },
+      { id: 'anak-aia', nama: 'Kelompok Tani Anak Aia', ketua: 'Bachtiar', hp: '', alamat: 'Jorong Anak Aia', anggota: 21, luas: '22 Ha', komoditas: 'Padi & Hortikultura', produktivitas: '6.5 Ton/Ha', status: 'Aktif', members: [['Bachtiar', 'Padi', '1.5 Ha', 'Aktif'], ['Eri', 'Hortikultura', '0.7 Ha', 'Aktif'], ['Joni', 'Padi', '1.1 Ha', 'Aktif']] },
+      { id: 'ikua-koto', nama: 'Kelompok Tani Ikua Koto', ketua: 'Darmansyah', hp: '', alamat: 'Jorong Ikua Koto', anggota: 24, luas: '25 Ha', komoditas: 'Padi Sawah', produktivitas: '6.8 Ton/Ha', status: 'Aktif', members: [['Darmansyah', 'Padi', '1.7 Ha', 'Aktif'], ['Taufik', 'Padi', '1.2 Ha', 'Aktif'], ['Wandra', 'Padi', '1.1 Ha', 'Aktif']] }
     ];
 
     const kelompokTaniData = kelompokTaniDB.length > 0 ? kelompokTaniDB : kelompokTaniFallback;
@@ -181,7 +181,14 @@
       document.getElementById('tdLuas').innerText = item.luas;
       document.getElementById('tdKomoditas').innerText = item.komoditas;
       document.getElementById('tdProduktivitas').innerText = item.produktivitas;
-      document.getElementById('tdWaBtn').href = `https://wa.me/${item.hp}?text=Halo%20Ketua%20${encodeURIComponent(item.nama)}`;
+      
+      const waBtn = document.getElementById('tdWaBtn');
+      if (item.hp && item.hp.trim() !== '') {
+        waBtn.style.display = 'inline-flex';
+        waBtn.href = `https://wa.me/${item.hp.trim()}?text=Halo%20Ketua%20${encodeURIComponent(item.nama)}`;
+      } else {
+        waBtn.style.display = 'none';
+      }
 
       const tbody = document.getElementById('tdMembersTable');
       tbody.innerHTML = item.members.map(m => `

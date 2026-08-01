@@ -8,12 +8,6 @@
           <span>Kantor Wali Nagari Kubang Koto Berapak, Kec. Bayang, Kab. Pesisir Selatan, Sumatera Barat</span>
         </div>
         <div class="contact-row">
-          <span>Telepon: (0755) 123-456</span>
-        </div>
-        <div class="contact-row">
-          <span>WhatsApp: +62 812-3456-7890</span>
-        </div>
-        <div class="contact-row">
           <span>Email: nagari.kubangkotoberapak@gmail.com</span>
         </div>
         <div class="contact-row">
@@ -21,7 +15,6 @@
         </div>
       </div>
       <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap;">
-        <a class="btn btn-wa" href="https://wa.me/6281234567890" target="_blank">Hubungi WhatsApp</a>
         <a class="btn btn-gold" href="mailto:nagari.kubangkotoberapak@gmail.com">Kirim Email</a>
       </div>
     </div>

@@ -29,7 +29,7 @@ Route::get('/pertanian', function () {
             'id' => 'kt-'.$kt->id,
             'nama' => $kt->nama_kelompok,
             'ketua' => $kt->ketua,
-            'hp' => '6281234567890',
+            'hp' => '',
             'alamat' => $kt->jorong,
             'anggota' => $kt->jumlah_anggota,
             'luas' => $kt->luas_lahan,
