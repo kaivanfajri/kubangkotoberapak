@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@yield('title', 'Nagari Kubang Koto Berapak')</title>
+  <link rel="icon" type="image/jpeg" href="{{ asset('icon.jpeg') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
@@ -16,7 +17,7 @@
     <div class="nav-inner">
       <a href="{{ route('home') }}" class="brand">
         <img src="{{ asset('icon.jpeg') }}" alt="Logo Pesisir Selatan" class="brand-logo">
-        <span>Kubang Bayang Pesisir Selatan<small>Nagari Kubang Koto Berapak</small></span>
+        <span>Nagari Kubang Koto Berapak<small>Kec. Bayang, Kabupaten Pesisir Selatan</small></span>
       </a>
 
       <div class="nav-menu">
