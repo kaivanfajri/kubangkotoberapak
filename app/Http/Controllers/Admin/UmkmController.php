@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Umkm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UmkmController extends Controller
 {
@@ -129,6 +130,17 @@ class UmkmController extends Controller
 
     public function destroy(Umkm $umkm)
     {
+        $allPhotos = is_array($umkm->galeri_foto) ? $umkm->galeri_foto : [];
+        if ($umkm->foto && !in_array($umkm->foto, $allPhotos)) {
+            $allPhotos[] = $umkm->foto;
+        }
+
+        foreach ($allPhotos as $photo) {
+            if ($photo && Storage::disk('public')->exists($photo)) {
+                Storage::disk('public')->delete($photo);
+            }
+        }
+
         $umkm->delete();
         return redirect()->route('admin.umkm.index')->with('success', 'Data UMKM berhasil dihapus!');
     }
