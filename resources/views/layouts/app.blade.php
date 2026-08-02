@@ -46,6 +46,9 @@
                 <a href="{{ route('admin.harvests.index') }}" class="admin-link {{ request()->routeIs('admin.harvests.*') ? 'active' : '' }}">
                     Kelola Data Panen
                 </a>
+                <a href="{{ route('admin.settings.edit') }}" class="admin-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                    Pengaturan Website
+                </a>
                 <a href="{{ route('profile.edit') }}" class="admin-link {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
                     Pengaturan Akun
                 </a>

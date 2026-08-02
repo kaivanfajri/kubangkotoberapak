@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\UmkmController;
 use App\Http\Controllers\Admin\KelompokTaniController;
 use App\Http\Controllers\Admin\GaleriController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\PublicHarvestController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Berita;
@@ -169,6 +170,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::post('/struktur', [StrukturLembagaController::class, 'updateStruktur'])->name('struktur.update');
     Route::get('/lembaga', [StrukturLembagaController::class, 'editLembaga'])->name('lembaga.edit');
     Route::post('/lembaga', [StrukturLembagaController::class, 'updateLembaga'])->name('lembaga.update');
+
+    // Pengaturan Website
+    Route::get('/settings', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
 });
 
 Route::middleware('auth')->group(function () {

@@ -10,10 +10,11 @@
         $totalLembaga = \App\Models\Lembaga::count();
         $totalGaleri = \App\Models\Galeri::count();
         $totalBerita = \App\Models\Berita::count();
+        $totalStruktur = \App\Models\Struktur::count();
     @endphp
 
-    <!-- 4 STAT CARDS GRID -->
-    <div class="grid grid-4" style="margin-bottom:28px;">
+    <!-- 6 STAT CARDS GRID -->
+    <div class="grid grid-3" style="margin-bottom:16px;">
         <div class="admin-stat">
             <div class="as-num">{{ $totalUmkm }}</div>
             <div class="as-lbl">UMKM Terdaftar</div>
@@ -26,9 +27,19 @@
             <div class="as-num">{{ $totalBerita }}</div>
             <div class="as-lbl">Berita Terbit</div>
         </div>
+    </div>
+    <div class="grid grid-3" style="margin-bottom:28px;">
         <div class="admin-stat">
             <div class="as-num">{{ $totalGaleri }}</div>
             <div class="as-lbl">Foto Galeri</div>
+        </div>
+        <div class="admin-stat">
+            <div class="as-num">{{ $totalLembaga }}</div>
+            <div class="as-lbl">Lembaga Nagari</div>
+        </div>
+        <div class="admin-stat">
+            <div class="as-num">{{ $totalStruktur }}</div>
+            <div class="as-lbl">Perangkat Nagari</div>
         </div>
     </div>
 

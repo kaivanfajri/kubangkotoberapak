@@ -79,19 +79,24 @@
   </div>
 
   <!-- VISI & MISI -->
+  @php
+    $visi = \App\Models\Setting::getValue('visi', 'Terwujudnya Nagari Kubang Koto Berapak sebagai Nagari mandiri, berdaya saing, adil, dan bersatu dalam mensejahterakan masyarakat berlandaskan adat basandi syarak, syarak basandi Kitabullah.');
+    $misiRaw = \App\Models\Setting::getValue('misi', "Mewujudkan penyelenggaraan pemerintahan yang transparan & partisipatif.\nMengembangkan sistem perekonomian berbasis potensi pertanian & peternakan.\nPeningkatan pembangunan infrastruktur sarana umum nagari.\nMemperkuat nilai-nilai agama, norma adat, dan budaya kebersamaan Minangkabau.");
+    $misiItems = array_filter(array_map('trim', explode("\n", $misiRaw)));
+    $videoUrl = \App\Models\Setting::getValue('video_profil_url', 'https://www.youtube.com/embed/aQ5y-pAzR8k');
+  @endphp
   <div class="section section-alt">
     <div class="wrap" style="display:grid; grid-template-columns:1fr 1fr; gap:30px;">
       <div class="card reveal" style="padding:30px;">
         <div class="eyebrow">Visi</div>
-        <p style="color:var(--ink); font-size:15px; line-height:1.8;">"Terwujudnya Nagari Kubang Koto Berapak sebagai Nagari mandiri, berdaya saing, adil, dan bersatu dalam mensejahterakan masyarakat berlandaskan adat basandi syarak, syarak basandi Kitabullah."</p>
+        <p style="color:var(--ink); font-size:15px; line-height:1.8;">"{{ $visi }}"</p>
       </div>
       <div class="card reveal" style="padding:30px;">
         <div class="eyebrow">Misi Utama</div>
         <ul style="color:var(--ink); font-size:14px; line-height:1.8; list-style:none; padding:0;">
-          <li style="margin-bottom:8px;">✓ Mewujudkan penyelenggaraan pemerintahan yang transparan & partisipatif.</li>
-          <li style="margin-bottom:8px;">✓ Mengembangkan sistem perekonomian berbasis potensi pertanian & peternakan.</li>
-          <li style="margin-bottom:8px;">✓ Peningkatan pembangunan infrastruktur sarana umum nagari.</li>
-          <li style="margin-bottom:8px;">✓ Memperkuat nilai-nilai agama, norma adat, dan budaya kebersamaan Minangkabau.</li>
+          @foreach($misiItems as $misi)
+            <li style="margin-bottom:8px;">✓ {{ $misi }}</li>
+          @endforeach
         </ul>
       </div>
     </div>
@@ -103,7 +108,7 @@
       <div class="eyebrow center">Video Profil</div>
       <h2 class="section-title center reveal">Dokumentasi Nagari Kubang</h2>
       <div class="video-frame reveal" style="max-width:860px; margin:30px auto 0;">
-        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/aQ5y-pAzR8k" title="Dokumentasi Nagari Kubang" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%; height:100%; border:0; border-radius:22px;"></iframe>
+        <iframe width="100%" height="100%" src="{{ $videoUrl }}" title="Dokumentasi Nagari Kubang" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%; height:100%; border:0; border-radius:22px;"></iframe>
       </div>
     </div>
   </div>

@@ -1,3 +1,9 @@
+@php
+  $alamat = \App\Models\Setting::getValue('alamat_kantor', 'Kantor Wali Nagari Kubang Koto Berapak, Kec. Bayang, Kab. Pesisir Selatan, Sumatera Barat');
+  $email = \App\Models\Setting::getValue('email_nagari', 'nagari.kubangkotoberapak@gmail.com');
+  $jamKerja = \App\Models\Setting::getValue('jam_kerja', 'Senin–Jumat, 08.00–16.00 WIB');
+@endphp
+
 <div class="contact-section">
   <div class="contact-grid">
     <div>
@@ -5,17 +11,17 @@
       <h2 style="font-family:'Poppins',sans-serif; font-size:26px; margin-bottom:20px;">Kami Siap Membantu</h2>
       <div class="contact-info">
         <div class="contact-row">
-          <span>Kantor Wali Nagari Kubang Koto Berapak, Kec. Bayang, Kab. Pesisir Selatan, Sumatera Barat</span>
+          <span>{{ $alamat }}</span>
         </div>
         <div class="contact-row">
-          <span>Email: nagari.kubangkotoberapak@gmail.com</span>
+          <span>Email: {{ $email }}</span>
         </div>
         <div class="contact-row">
-          <span>Jam Kerja: Senin–Jumat, 08.00–16.00 WIB</span>
+          <span>Jam Kerja: {{ $jamKerja }}</span>
         </div>
       </div>
       <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap;">
-        <a class="btn btn-gold" href="mailto:nagari.kubangkotoberapak@gmail.com">Kirim Email</a>
+        <a class="btn btn-gold" href="mailto:{{ $email }}">Kirim Email</a>
       </div>
     </div>
     <div class="map-embed">
@@ -23,3 +29,4 @@
     </div>
   </div>
 </div>
+
