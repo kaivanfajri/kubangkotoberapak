@@ -32,33 +32,6 @@
     </div>
   </div>
 
-  <!-- SECTION KOLABORASI (4 LOGO) -->
-  <div class="collab-bar reveal">
-    <div class="collab-logos">
-      <!-- 1. Logo KKN Periode 1 -->
-      <div class="collab-badge" title="Logo KKN Periode 1 Unand">
-        <img src="{{ asset('ESokan.jpeg') }}" alt="Logo KKN Periode 1">
-      </div>
-      <!-- 2. Logo KKN 2 -->
-       <div class="collab-badge" title="Logo KKN Periode 2 Unand ">
-        <img src="{{ asset('logo kkn.png') }}" alt="Logo KKN Periode 2">
-      </div>
-      <!-- 3. Logo UNAND -->
-      <div class="collab-badge" title="Logo Universitas Andalas">
-        <img src="{{ asset('Unand.png') }}" alt="Logo Unand">
-      </div>
-      <!-- 4. Logo Nagari Kubang Koto Berapak (Placeholder Circle) -->
-      <<div class="collab-badge" title="Logo Pemkab Pesisir Selatan">
-        <img src="{{ asset('icon.jpeg') }}" alt="Logo Pemkab Pesisir Selatan">
-        </div>
-      </div>
-
-    <div class="collab-text">
-      <span class="hero-badge" style="background:var(--gold); color:var(--green-dark);">Kolaborasi</span>
-      <p>Program ini dilaksanakan melalui kolaborasi mahasiswa KKN Universitas Andalas dengan Pemerintah Nagari Kubang Koto Berapak, Kecamatan Bayang, Kabupaten Pesisir Selatan.</p>
-    </div>
-  </div>
-
   <!-- TENTANG NAGARI -->
   <div class="section">
     <div class="wrap" style="display:grid; grid-template-columns:1.1fr 1fr; gap:50px; align-items:center;">
@@ -183,6 +156,33 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- SECTION KOLABORASI (4 LOGO) -->
+  <div class="collab-bar reveal" style="margin-bottom:50px;">
+    <div class="collab-logos">
+      <!-- 1. Logo KKN Periode 1 -->
+      <div class="collab-badge" title="Logo KKN Periode 1 Unand">
+        <img src="{{ asset('ESokan.jpeg') }}" alt="Logo KKN Periode 1">
+      </div>
+      <!-- 2. Logo KKN 2 -->
+      <div class="collab-badge" title="Logo KKN Periode 2 Unand">
+        <img src="{{ asset('logo kkn.png') }}" alt="Logo KKN Periode 2">
+      </div>
+      <!-- 3. Logo UNAND -->
+      <div class="collab-badge" title="Logo Universitas Andalas">
+        <img src="{{ asset('Unand.png') }}" alt="Logo Unand">
+      </div>
+      <!-- 4. Logo Pemkab Pesisir Selatan -->
+      <div class="collab-badge" title="Logo Pemkab Pesisir Selatan">
+        <img src="{{ asset('icon.jpeg') }}" alt="Logo Pemkab Pesisir Selatan">
+      </div>
+    </div>
+
+    <div class="collab-text">
+      <span class="hero-badge" style="background:var(--gold); color:var(--green-dark);">Kolaborasi</span>
+      <p>Program ini dilaksanakan melalui kolaborasi mahasiswa KKN Universitas Andalas dengan Pemerintah Nagari Kubang Koto Berapak, Kecamatan Bayang, Kabupaten Pesisir Selatan.</p>
     </div>
   </div>
 
