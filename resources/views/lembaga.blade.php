@@ -110,17 +110,22 @@
       grid.innerHTML = items.map(item => {
         const kat = item.kategori || 'Lembaga Nagari';
         let pillClass = 'pill-gold';
-        let cardBgImg = imgPemerintahan;
+        let fallbackImg = imgPemerintahan;
         if (kat.includes('Pendidikan')) {
           pillClass = 'pill-blue';
-          cardBgImg = imgPendidikan;
+          fallbackImg = imgPendidikan;
         } else if (kat.includes('Kesehatan')) {
           pillClass = 'pill-green';
-          cardBgImg = imgKesehatan;
+          fallbackImg = imgKesehatan;
         } else if (kat.includes('Pemuda')) {
           pillClass = 'pill-gold';
-          cardBgImg = imgPemuda;
+          fallbackImg = imgPemuda;
         }
+
+        // Gunakan foto lokasi asli jika ada, fallback ke foto kategori
+        const cardBgImg = (item.foto && item.foto.trim() !== '')
+          ? '/storage/' + item.foto
+          : fallbackImg;
 
         return `
           <div class="card clickable card-hover" onclick="showLembagaDetail('${item.id}')" style="overflow:hidden; display:flex; flex-direction:column;">

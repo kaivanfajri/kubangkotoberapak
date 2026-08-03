@@ -22,7 +22,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.lembaga.update') }}" method="POST">
+        <form action="{{ route('admin.lembaga.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div id="lembagaListContainer">
@@ -76,6 +76,22 @@
                         <div class="field" style="margin-bottom:0;">
                             <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Deskripsi &amp; Tugas Lembaga</label>
                             <textarea name="items[{{ $index }}][desc]" rows="3" required style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:9px 12px; font-family:inherit; font-size:13.5px; line-height:1.6;">{{ $item['desc'] ?? '' }}</textarea>
+                        </div>
+
+                        <div class="field" style="margin-top:14px; margin-bottom:0;">
+                            <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:6px;">📷 Foto Lokasi Lembaga</label>
+                            @if(!empty($item['foto']))
+                                <div style="margin-bottom:8px;">
+                                    <img src="{{ asset('storage/' . $item['foto']) }}" alt="Foto Lokasi" style="width:100%; max-height:160px; object-fit:cover; border-radius:10px; border:1.5px solid #e0e6e0;">
+                                    <p style="font-size:11px; color:var(--muted); margin-top:4px;">Foto saat ini. Upload baru untuk mengganti.</p>
+                                </div>
+                            @else
+                                <div style="background:#f8faf8; border:1.5px dashed #c0d5c0; border-radius:10px; padding:12px; margin-bottom:8px; text-align:center; color:var(--muted); font-size:12px;">
+                                    Belum ada foto lokasi
+                                </div>
+                            @endif
+                            <input type="file" name="foto[{{ $index }}]" accept="image/*" style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:8px 12px; font-family:inherit; font-size:13px; background:#fff; cursor:pointer;">
+                            <small style="color:var(--muted); font-size:11px;">Format: JPG, PNG, WEBP. Maks 2MB. Kosongkan jika tidak ingin mengganti.</small>
                         </div>
                     </div>
                 @endforeach
@@ -150,6 +166,15 @@
                 <div class="field" style="margin-bottom:0;">
                     <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">Deskripsi &amp; Tugas Lembaga</label>
                     <textarea name="items[${index}][desc]" rows="3" placeholder="Tuliskan tugas, fungsi, dan profil singkat..." required style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:9px 12px; font-family:inherit; font-size:13.5px; line-height:1.6;"></textarea>
+                </div>
+
+                <div class="field" style="margin-top:14px; margin-bottom:0;">
+                    <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:6px;">📷 Foto Lokasi Lembaga</label>
+                    <div style="background:#f8faf8; border:1.5px dashed #c0d5c0; border-radius:10px; padding:12px; margin-bottom:8px; text-align:center; color:var(--muted); font-size:12px;">
+                        Belum ada foto lokasi
+                    </div>
+                    <input type="file" name="foto[${index}]" accept="image/*" style="width:100%; border:1.5px solid #e0e6e0; border-radius:8px; padding:8px 12px; font-family:inherit; font-size:13px; background:#fff; cursor:pointer;">
+                    <small style="color:var(--muted); font-size:11px;">Format: JPG, PNG, WEBP. Maks 2MB.</small>
                 </div>
             `;
             

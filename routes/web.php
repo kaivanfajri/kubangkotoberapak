@@ -85,6 +85,7 @@ Route::get('/lembaga', function () {
                 'anggota' => $l->jumlah_anggota,
                 'hp' => $l->nomor_hp,
                 'desc' => $l->deskripsi,
+                'foto' => $l->logo,
             ];
         })->toArray();
     } else {

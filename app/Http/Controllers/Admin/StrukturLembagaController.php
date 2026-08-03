@@ -191,6 +191,7 @@ class StrukturLembagaController extends Controller
                     'anggota' => $l->jumlah_anggota,
                     'hp' => $l->nomor_hp,
                     'desc' => $l->deskripsi,
+                    'foto' => $l->logo,
                 ];
             })->toArray();
         } else {
@@ -206,24 +207,59 @@ class StrukturLembagaController extends Controller
     public function updateLembaga(Request $request)
     {
         $items = array_values($request->input('items', []));
+        $uploadedFiles = $request->file('foto', []);
 
-        // Sync with database table lembagas
-        \App\Models\Lembaga::truncate();
-        foreach ($items as $item) {
-            if (!empty($item['nama'])) {
-                \App\Models\Lembaga::create([
-                    'nama_lembaga' => $item['nama'],
-                    'kategori' => $item['kategori'] ?? 'Pemerintahan & Adat',
-                    'ketua' => $item['ketua'] ?? '',
-                    'jumlah_anggota' => $item['anggota'] ?? '',
-                    'nomor_hp' => $item['hp'] ?? '',
-                    'deskripsi' => $item['desc'] ?? '',
-                ]);
+        // Kumpulkan nama lembaga yang dikirim dari form
+        $submittedNames = array_filter(array_column($items, 'nama'));
+
+        // Hapus lembaga yang tidak ada di form + hapus file foto fisiknya
+        $toDelete = \App\Models\Lembaga::whereNotIn('nama_lembaga', $submittedNames)->get();
+        foreach ($toDelete as $del) {
+            if ($del->logo && Storage::disk('public')->exists($del->logo)) {
+                Storage::disk('public')->delete($del->logo);
             }
+            $del->delete();
         }
 
-        // Sync with JSON file for fallback
-        $this->writeJsonData($this->getLembagaPath(), $items);
+        $jsonPayload = [];
+
+        foreach ($items as $index => $item) {
+            if (empty($item['nama'])) continue;
+
+            // Cari record yang sudah ada berdasarkan nama
+            $existing = \App\Models\Lembaga::where('nama_lembaga', $item['nama'])->first();
+            $fotoPath = $existing?->logo; // pertahankan foto lama by default
+
+            // Handle upload foto baru jika ada
+            if (isset($uploadedFiles[$index]) && $uploadedFiles[$index]->isValid()) {
+                // Hapus foto lama jika ada
+                if ($fotoPath && Storage::disk('public')->exists($fotoPath)) {
+                    Storage::disk('public')->delete($fotoPath);
+                }
+                $fotoPath = $uploadedFiles[$index]->store('lembaga', 'public');
+            }
+
+            $payload = [
+                'nama_lembaga' => $item['nama'],
+                'kategori'     => $item['kategori'] ?? 'Pemerintahan & Adat',
+                'ketua'        => $item['ketua'] ?? '',
+                'jumlah_anggota' => $item['anggota'] ?? '',
+                'nomor_hp'     => $item['hp'] ?? '',
+                'deskripsi'    => $item['desc'] ?? '',
+                'logo'         => $fotoPath,
+            ];
+
+            if ($existing) {
+                $existing->update($payload);
+            } else {
+                \App\Models\Lembaga::create($payload);
+            }
+
+            $jsonPayload[] = array_merge($item, ['foto' => $fotoPath]);
+        }
+
+        // Sync fallback JSON
+        $this->writeJsonData($this->getLembagaPath(), $jsonPayload);
 
         return redirect()->back()->with('success', 'Daftar Lembaga Nagari berhasil diperbarui di database.');
     }
