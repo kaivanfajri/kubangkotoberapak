@@ -190,5 +190,20 @@
                 if (numSpan) numSpan.innerText = i + 1;
             });
         }
+
+        // Client-side File Size Validation (Max 5MB per file)
+        document.addEventListener('change', function(e) {
+            if (e.target && e.target.type === 'file') {
+                const file = e.target.files[0];
+                if (file) {
+                    const maxSizeMB = 5;
+                    if (file.size > maxSizeMB * 1024 * 1024) {
+                        const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                        alert(`⚠️ Ukuran foto "${file.name}" (${fileSizeMB} MB) terlalu besar!\n\nMaksimal ukuran per file foto adalah ${maxSizeMB} MB. Silakan kompres foto tersebut terlebih dahulu atau gunakan foto dengan resolusi lebih kecil.`);
+                        e.target.value = ''; // Reset input file
+                    }
+                }
+            }
+        });
     </script>
 @endsection

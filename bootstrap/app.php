@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Exceptions\PostTooLargeException;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,5 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (PostTooLargeException $e, Request $request) {
+            $maxSize = ini_get('post_max_size');
+            return redirect()->back()
+                ->withInput($request->except(['foto', 'gambar', 'image', 'file']))
+                ->with('error', "Ukuran total file/data yang diunggah terlalu besar (melebihi batas server {$maxSize}). Silakan kurangi ukuran foto atau upload file secara bertahap.");
+        });
     })->create();

@@ -81,6 +81,13 @@
                 </div>
             </div>
 
+            @if(session('error'))
+                <div style="background:#fef2f2; border:1.5px solid #fca5a5; color:#991b1b; padding:14px 18px; border-radius:12px; margin-bottom:20px; font-weight:600; font-size:14px; box-shadow:0 2px 8px rgba(220,38,38,0.08); display:flex; align-items:center; gap:10px;">
+                    <span style="font-size:18px;">⚠️</span>
+                    <div>{{ session('error') }}</div>
+                </div>
+            @endif
+
             @yield('content')
         </div>
     </div>
