@@ -27,7 +27,7 @@
           <img src="{{ asset('QR_Code_Pengaduan.png') }}" alt="QR Code Pengaduan Nagari" style="width:100px; height:100px; border-radius:10px; object-fit:contain; flex-shrink:0; display:block;">
         </a>
         <div>
-          <div style="font-size:11px; font-weight:700; color:var(--green-dark); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">📋 Pengaduan Masyarakat</div>
+          <div style="font-size:11px; font-weight:700; color:var(--green-dark); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Pengaduan Masyarakat</div>
           <p style="font-size:13px; color:var(--ink); line-height:1.6; margin-bottom:12px;">Sampaikan aspirasi, keluhan, atau laporan kepada Nagari Kubang Koto Berapak melalui form digital berikut.</p>
           <a href="https://forms.gle/n1FUbecTAm9goBy66" target="_blank" rel="noopener"
              style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff; padding:8px 16px; border-radius:20px; font-size:12.5px; font-weight:700; text-decoration:none; box-shadow:0 3px 10px rgba(46,125,50,0.25);">
