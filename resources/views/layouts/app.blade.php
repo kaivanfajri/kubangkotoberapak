@@ -50,6 +50,9 @@
                 <a href="{{ route('admin.settings.edit') }}" class="admin-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                     Pengaturan Website
                 </a>
+                <a href="{{ route('admin.panduan') }}" class="admin-link {{ request()->routeIs('admin.panduan') ? 'active' : '' }}" style="border-top:1px solid rgba(255,255,255,0.12); margin-top:8px; padding-top:14px;">
+                    Panduan Penggunaan
+                </a>
                 <a href="{{ route('profile.edit') }}" class="admin-link {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
                     Pengaturan Akun
                 </a>

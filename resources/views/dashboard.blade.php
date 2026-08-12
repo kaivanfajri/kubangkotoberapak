@@ -78,4 +78,16 @@
             </div>
         </div>
     </div>
+
+    {{-- BANNER PANDUAN --}}
+    <div style="background:linear-gradient(135deg,var(--green),var(--green-dark)); border-radius:16px; padding:22px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; box-shadow:0 6px 20px rgba(46,125,50,0.22);">
+        <div>
+            <div style="color:rgba(255,255,255,0.75); font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Butuh bantuan?</div>
+            <div style="color:#fff; font-size:15px; font-weight:700; font-family:'Poppins',sans-serif;">Tonton Video Panduan Penggunaan Admin</div>
+            <div style="color:rgba(255,255,255,0.8); font-size:13px; margin-top:2px;">Panduan lengkap cara mengelola semua fitur website nagari.</div>
+        </div>
+        <a href="{{ route('admin.panduan') }}" style="background:#fff; color:var(--green-dark); padding:10px 22px; border-radius:22px; font-size:13px; font-weight:700; text-decoration:none; white-space:nowrap; box-shadow:0 2px 10px rgba(0,0,0,0.12); flex-shrink:0;">
+            Lihat Panduan →
+        </a>
+    </div>
 @endsection
