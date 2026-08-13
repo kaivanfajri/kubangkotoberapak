@@ -131,29 +131,19 @@
   <!-- KEGIATAN NAGARI -->
   <div class="section">
     <div class="wrap">
-      <div class="eyebrow center">Kegiatan Nagari</div>
-      <h2 class="section-title center reveal">Aktivitas Rutin Masyarakat</h2>
-      <div class="grid grid-3 reveal" style="margin-top:30px;">
-        <div class="card card-hover">
-          <div class="card-body">
-            <div class="card-num">01</div>
-            <h4>Tradisi Adat & Gotong Royong</h4>
-            <p>Kegiatan kebersamaan masyarakat dalam menyambut musim panen dan perawatan saluran irigasi sawah.</p>
-          </div>
+      <h2 class="reveal" style="text-align: center; color: var(--green-dark); font-size: 30px; font-weight: 700; margin-bottom: 36px;">Kegiatan Nagari</h2>
+      <div class="grid grid-3 reveal" style="gap: 24px;">
+        <div class="card card-hover" style="padding: 32px 24px; border-radius: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); background: #fff;">
+          <h4 style="color: var(--green-dark); text-align: center; font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 16px;">Tradisi Makan Balanjuang sebagai Perekat Sosial</h4>
+          <p style="color: var(--green-dark); font-size: 14.5px; line-height: 1.7; text-align: left;">Ritual makan bersama secara bergotong-royong dengan hidangan bersama dalam satu wadah adalah simbol nyata kesetaraan, keakraban, dan kegotongroyongan. Tradisi ini berperan sebagai perekat hubungan sosial yang mendalam antarmasyarakat, memperkuat kohesi dan rasa kekeluargaan dalam nagari.</p>
         </div>
-        <div class="card card-hover">
-          <div class="card-body">
-            <div class="card-num">02</div>
-            <h4>Pelatihan Randai & Seni Minang</h4>
-            <p>Pelestarian seni budaya tradisional teater & bela diri Randai yang rutin dilakukan pemuda nagari.</p>
-          </div>
+        <div class="card card-hover" style="padding: 32px 24px; border-radius: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); background: #fff;">
+          <h4 style="color: var(--green-dark); text-align: center; font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 16px;">Latihan Randai Setiap Malam Minggu</h4>
+          <p style="color: var(--green-dark); font-size: 14.5px; line-height: 1.7; text-align: left;">Setiap akhir pekan, nagari menghidupkan warisan budayanya melalui latihan randai (teater tradisional Minangkabau). Kegiatan ini berfungsi sebagai wadah pelestarian seni, pelatihan bagi generasi muda dalam seni peran dan musik tradisional, serta penguatan identitas budaya lokal.</p>
         </div>
-        <div class="card card-hover">
-          <div class="card-body">
-            <div class="card-num">03</div>
-            <h4>Musyawarah Kelompok Tani</h4>
-            <p>Koordinasi berkala 7 kelompok tani aktif untuk distribusi benih, pupuk, dan jadwal tanam padi.</p>
-          </div>
+        <div class="card card-hover" style="padding: 32px 24px; border-radius: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); background: #fff;">
+          <h4 style="color: var(--green-dark); text-align: center; font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 16px;">Permainan olahraga Bola Voli Setiap Sore</h4>
+          <p style="color: var(--green-dark); font-size: 14.5px; line-height: 1.7; text-align: left;">Lapangan nagari menjadi pusat keakraban dan kebugaran setiap sore melalui kegiatan bola voli. Aktivitas ini tidak hanya untuk olahraga, tetapi juga sebagai sarana pelepas penat, pembangun semangat kebersamaan, dan sportivitas antarwarga.</p>
         </div>
       </div>
     </div>
