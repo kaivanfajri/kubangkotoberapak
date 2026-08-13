@@ -15,7 +15,7 @@
                 style="width:100%; max-height:520px; display:block; border-radius:14px;"
                 preload="metadata"
                 poster="{{ asset('kantorwalinagari.jpg') }}">
-                <source src="{{ asset('DEMONSTRASI PENGGUNAAN WEBSITE.mp4') }}" type="video/mp4">
+                <source src="{{ asset('Video Panduan Admin.mp4') }}" type="video/mp4">
                 Browser Anda tidak mendukung pemutaran video HTML5.
             </video>
         </div>
