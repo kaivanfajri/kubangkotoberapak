@@ -175,6 +175,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // Pengaturan Website
     Route::get('/settings', [SettingController::class, 'edit'])->name('settings.edit');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+
+    // Panduan Penggunaan
+    Route::get('/panduan', function () {
+        return view('admin.panduan');
+    })->name('panduan');
 });
 
 Route::middleware('auth')->group(function () {
