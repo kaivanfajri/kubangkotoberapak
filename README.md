@@ -1,7 +1,7 @@
 # 🏡 Portal Nagari Kubang Koto Berapak
 
 Website resmi Nagari Kubang Koto Berapak, Kecamatan Bayang, Kabupaten Pesisir Selatan, Sumatera Barat.  
-Dikembangkan melalui program KKN Universitas Andalas Periode 2 Tahun 2026.
+Dikembangkan melalui program KKN Universitas Andalas Periode 1 dan 2 Tahun 2026.
 
 ---
 
